@@ -1,1 +1,1 @@
-# argus
+# Argus - Web Performance Metric Collector
