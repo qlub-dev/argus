@@ -1,0 +1,8 @@
+.eslintcache
+.cache/**
+.storybook/**
+dist/**
+node_modules/**
+patches/**
+storybook-static/**
+CHANGELOG.md

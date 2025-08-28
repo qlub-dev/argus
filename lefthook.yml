@@ -1,0 +1,19 @@
+pre-commit:
+  parallel: true
+  commands:
+    format:
+      glob: "*.{js,ts,jsx,tsx}"
+      run: pnpm dlx prettier --write --cache {staged_files} && git add {staged_files}
+    lint:
+      glob: "*.{js,ts,jsx,tsx}"
+      run: pnpm dlx eslint {staged_files} --fix --cache --report-unused-disable-directives && git add {staged_files}
+    type-check:
+      glob: "*.{js,ts,jsx,tsx}"
+      run: pnpm exec tsc --noEmit
+
+commit-msg:
+  commands:
+    commitlint:
+      skip:
+        - rebase
+      run: pnpm dlx commitlint --edit --color
