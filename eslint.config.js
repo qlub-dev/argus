@@ -35,12 +35,6 @@ module.exports = defineConfig([
 
     extends: compat.extends("plugin:@typescript-eslint/recommended"),
 
-    settings: {
-      react: {
-        version: "18.0"
-      }
-    },
-
     plugins: {
       "@typescript-eslint": typescriptEslint,
       "unused-imports": unusedImports
