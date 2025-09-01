@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/qlub-dev/argus/compare/v1.0.1...v1.0.2) (2025-09-01)
+
+
+### Bug Fixes
+
+* **ci:** remove registry url from action ([7a45587](https://github.com/qlub-dev/argus/commit/7a4558726722574c7f40406f752f3ce31d0ad2d1))
+
 ## [1.0.1](https://github.com/qlub-dev/argus/compare/v1.0.0...v1.0.1) (2025-09-01)
 
 
