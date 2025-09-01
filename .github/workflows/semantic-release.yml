@@ -39,6 +39,9 @@ jobs:
           restore-keys: |
             pnpm-${{ runner.os }}-
 
+      - name: Create .npmrc
+        run: cp .npmrc.ci .npmrc
+
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
         env:
