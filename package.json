@@ -20,7 +20,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/clubpay/js-gift-module.git"
+    "url": "git+https://github.com/qlub-dev/argus.git"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com",
