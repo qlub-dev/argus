@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/qlub-dev/argus/compare/v1.0.2...v1.0.3) (2025-09-01)
+
+
+### Bug Fixes
+
+* **ci:** remove pvt property to make npm publish to the registry ([5cfec49](https://github.com/qlub-dev/argus/commit/5cfec49a663f39be1ff188ceb97fe3b07b1c1790))
+
 ## [1.0.2](https://github.com/qlub-dev/argus/compare/v1.0.1...v1.0.2) (2025-09-01)
 
 
