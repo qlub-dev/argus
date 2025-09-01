@@ -1,3 +1,10 @@
+# [1.1.0-beta.1](https://github.com/qlub-dev/argus/compare/v1.0.3...v1.1.0-beta.1) (2025-09-01)
+
+
+### Features
+
+* export report web vitals ([ee9b500](https://github.com/qlub-dev/argus/commit/ee9b5003f59a29726c067ea3da3262bc19291d6a))
+
 ## [1.0.3](https://github.com/qlub-dev/argus/compare/v1.0.2...v1.0.3) (2025-09-01)
 
 
