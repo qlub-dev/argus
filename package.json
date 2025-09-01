@@ -1,6 +1,6 @@
 {
   "name": "@qlub-dev/argus",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Web performance metric collector",
   "private": true,
   "author": "Qlub",

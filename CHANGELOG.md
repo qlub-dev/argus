@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/qlub-dev/argus/compare/v1.0.0...v1.0.1) (2025-09-01)
+
+
+### Bug Fixes
+
+* **ci:** add npmrc.ci ([1358c08](https://github.com/qlub-dev/argus/commit/1358c080200f77b1e843ca2fb66297de7ecf7fbf))
+
 # 1.0.0 (2025-09-01)
 
 
