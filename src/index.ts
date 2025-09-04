@@ -16,7 +16,7 @@ const sendToAnalytics = (metric: Metric) => {
   navigator.sendBeacon("/analytics", body);
 };
 
-export const reportWebVitalsWithArgus = () => {
+export const reportWebVitals = () => {
   onCLS(sendToAnalytics);
   onINP(sendToAnalytics);
   onLCP(sendToAnalytics);
