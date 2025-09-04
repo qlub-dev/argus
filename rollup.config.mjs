@@ -1,3 +1,4 @@
+import json from "@rollup/plugin-json";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
 import terser from "@rollup/plugin-terser";
 import typescript from "@rollup/plugin-typescript";
@@ -17,7 +18,7 @@ export default [
         sourcemap: true
       }
     ],
-    plugins: [typescript({ tsconfig: "./tsconfig.json" }), nodeResolve(), terser()],
+    plugins: [nodeResolve(), json(), typescript({ tsconfig: "./tsconfig.json" }), terser()],
     external: ["web-vitals"]
   }
 ];
