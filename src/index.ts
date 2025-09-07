@@ -6,8 +6,9 @@ console.log("Argus Initiated");
 
 const prepareMetric = (metric: Record<string, any>) => {
   return {
-    agent: "Argus",
-    preparation_time: new Date().getTime(),
+    agent: "argus",
+    event: "performance_metric",
+    preparedAt: new Date().getTime(),
     ...metric
   };
 };
