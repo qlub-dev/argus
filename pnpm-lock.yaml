@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      cosmiconfig:
+        specifier: ^9.0.0
+        version: 9.0.0(typescript@5.9.2)
       web-vitals:
         specifier: ^5.1.0
         version: 5.1.0
@@ -18,9 +21,15 @@ importers:
       '@commitlint/config-conventional':
         specifier: 17.4.2
         version: 17.4.2
+      '@eslint/eslintrc':
+        specifier: ^3.3.1
+        version: 3.3.1
       '@eslint/js':
         specifier: ^9.34.0
         version: 9.34.0
+      '@rollup/plugin-json':
+        specifier: ^6.1.0
+        version: 6.1.0(rollup@4.49.0)
       '@rollup/plugin-node-resolve':
         specifier: ^16.0.1
         version: 16.0.1(rollup@4.49.0)
@@ -655,6 +664,15 @@ packages:
   '@pnpm/npm-conf@2.3.1':
     resolution: {integrity: sha512-c83qWb22rNRuB0UaVCI0uRPNRr8Z0FWnEIvT47jiHAmOIUHbBOg5XvV7pM5x+rKn9HRpjxquDbXYSXr3fAKFcw==}
     engines: {node: '>=12'}
+
+  '@rollup/plugin-json@6.1.0':
+    resolution: {integrity: sha512-EGI2te5ENk1coGeADSIwZ7G2Q8CJS2sF120T7jLw4xFw9n7wIOXHo+kIYRAoVpJAN+kmqZSoO3Fp4JtoNF4ReA==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      rollup: ^1.20.0||^2.0.0||^3.0.0||^4.0.0
+    peerDependenciesMeta:
+      rollup:
+        optional: true
 
   '@rollup/plugin-node-resolve@16.0.1':
     resolution: {integrity: sha512-tk5YCxJWIG81umIvNkSod2qK5KyQW19qcBF/B78n1bjtOON6gzKoVeSzAE8yHCZEDmqkHKkxplExA8KzdJLJpA==}
@@ -4266,6 +4284,12 @@ snapshots:
       '@pnpm/config.env-replace': 1.1.0
       '@pnpm/network.ca-file': 1.0.2
       config-chain: 1.1.13
+
+  '@rollup/plugin-json@6.1.0(rollup@4.49.0)':
+    dependencies:
+      '@rollup/pluginutils': 5.2.0(rollup@4.49.0)
+    optionalDependencies:
+      rollup: 4.49.0
 
   '@rollup/plugin-node-resolve@16.0.1(rollup@4.49.0)':
     dependencies:
