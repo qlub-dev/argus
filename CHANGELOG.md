@@ -1,3 +1,20 @@
+# [1.1.0-beta.2](https://github.com/qlub-dev/argus/compare/v1.1.0-beta.1...v1.1.0-beta.2) (2025-09-07)
+
+
+### Bug Fixes
+
+* **eslint:** add missing dep required for eslint ([6054480](https://github.com/qlub-dev/argus/commit/60544806dbd9f9ef30392a56dec75e581de5c81c))
+
+
+### Features
+
+* add folder strucutre ([7af0eff](https://github.com/qlub-dev/argus/commit/7af0efff903e9932fad6a8796265a514fdfc612d))
+* **TECH-4924:** add config loading functionality ([77151b0](https://github.com/qlub-dev/argus/commit/77151b00b98ff259e12f72a666ef465798d58856))
+* **TECH-4924:** rename file ([17080b1](https://github.com/qlub-dev/argus/commit/17080b1087084d69a7296e7763ff2612546f5dd3))
+* **tests:** add loader tests with mocks ([5b3f0b6](https://github.com/qlub-dev/argus/commit/5b3f0b6b2c8b3426c60a6a3a13b622b56407022f))
+* **types,enums:** update types and enums ([f30e800](https://github.com/qlub-dev/argus/commit/f30e800c0197a877ed638d12707c79f428481d9a))
+* **web-vitals:** add transport-callback to report web vitals ([353592b](https://github.com/qlub-dev/argus/commit/353592b075c3acc97efa76840d2215c22fc37f8b))
+
 # [1.1.0-beta.1](https://github.com/qlub-dev/argus/compare/v1.0.3...v1.1.0-beta.1) (2025-09-01)
 
 
