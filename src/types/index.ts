@@ -1,3 +1,1 @@
-export type ArgusConfig = {
-  samplingRate?: number;
-};
+export type TransportCallback = (payload: Record<string, any>) => void;
