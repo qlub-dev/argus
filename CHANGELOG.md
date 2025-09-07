@@ -1,3 +1,10 @@
+# [1.1.0-beta.3](https://github.com/qlub-dev/argus/compare/v1.1.0-beta.2...v1.1.0-beta.3) (2025-09-07)
+
+
+### Features
+
+* **web-vitals:** allow passing of metadata and refactor code ([4e096ee](https://github.com/qlub-dev/argus/commit/4e096ee68668584c60174dbcadcb4be9b7c352c7))
+
 # [1.1.0-beta.2](https://github.com/qlub-dev/argus/compare/v1.1.0-beta.1...v1.1.0-beta.2) (2025-09-07)
 
 
