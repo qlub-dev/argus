@@ -1,1 +1,1 @@
-export type TransportCallback = (payload: Record<string, any>) => void;
+export type TransporterCallback = (payload: Record<string, any>) => void;

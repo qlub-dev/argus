@@ -1,6 +1,6 @@
 import { onCLS, onINP, onLCP } from "web-vitals";
 import type { Metric } from "web-vitals";
-import type { TransportCallback } from "./types";
+import type { TransporterCallback } from "./types";
 
 console.log("Argus Initiated");
 
@@ -12,7 +12,7 @@ const prepareMetric = (metric: Record<string, any>) => {
   };
 };
 
-const generateTransporter = (transporterCallback: TransportCallback) => (metric: Metric) => {
+const generateTransporter = (transporterCallback: TransporterCallback) => (metric: Metric) => {
   const metricPayload = prepareMetric(metric);
 
   console.log("Argus log: ", metric);
@@ -20,7 +20,7 @@ const generateTransporter = (transporterCallback: TransportCallback) => (metric:
   transporterCallback(metricPayload);
 };
 
-export const reportWebVitals = (transporter: TransportCallback) => {
+export const reportWebVitals = (transporter: TransporterCallback) => {
   const transportMetric = generateTransporter(transporter);
 
   onCLS(transportMetric);
