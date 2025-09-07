@@ -1,6 +1,6 @@
-import { onCLS, onINP, onLCP, onFCP, onTTFB } from "web-vitals";
+import { onCLS, onFCP, onINP, onLCP, onTTFB } from "web-vitals";
 import type { Metric } from "web-vitals";
-import type { TransporterCallback } from "./types";
+import type { OnReportCb } from "./types";
 
 console.log("Argus Initiated");
 
@@ -16,14 +16,13 @@ const prepareMetric = (metric: Record<string, any>, metadata?: Record<string, an
   };
 };
 
-const generateReportHandler =
-  (transporterCallback: TransporterCallback, metadata?: Record<string, any>) => (metric: Metric) => {
-    const metricPayload = prepareMetric(metric, metadata);
-    console.log("Argus log: ", metric);
-    transporterCallback(metricPayload);
-  };
+const generateReportHandler = (onReportCb: OnReportCb, metadata?: Record<string, any>) => (metric: Metric) => {
+  const metricPayload = prepareMetric(metric, metadata);
+  console.log("Argus log: ", metric);
+  onReportCb(metricPayload);
+};
 
-export const reportWebVitals = (onReport: TransporterCallback, metadata?: Record<string, any>) => {
+export const reportWebVitals = (onReport: OnReportCb, metadata?: Record<string, any>) => {
   const reportHandler = generateReportHandler(onReport, metadata);
   METRIC_HANDLERS.forEach((register) => register(reportHandler));
 };
