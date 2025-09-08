@@ -29,18 +29,17 @@ export class Argus {
   async init(metadata?: Record<string, any>) {
     this.#config = await loadConfigs();
 
-    // Web vitals
     if (this.#config.webVitals?.enabled) {
       reportWebVitals(this.#onReport, metadata);
     }
 
-    // API timing
     if (this.#config.apiTiming?.enabled && Array.isArray(this.#config.apiTiming.trackers)) {
       this.#config.apiTiming.trackers.forEach((tracker: { regex: RegExp | string }) => {
         const regex = tracker.regex instanceof RegExp ? tracker.regex : new RegExp(tracker.regex);
         const collector = createApiTimingCollector(regex, (entry) => {
           const payload = prepareMetric(entry, metadata);
           this.#onReport(payload);
+          console.log("root api metrics entry", entry, " regex", regex);
         });
         this.#apiCollectors.push(collector);
       });
