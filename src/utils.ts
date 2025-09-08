@@ -2,7 +2,7 @@ export const prepareMetric = (metric: Record<string, any>, metadata?: Record<str
   return {
     agent: "argus",
     event: "performance_metric",
-    preparedAt: Date.now(),
+    preparedAt: performance.now(),
     ...metric,
     ...(metadata ?? {})
   };
