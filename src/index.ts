@@ -39,7 +39,7 @@ export class Argus {
         const collector = createApiTimingCollector(regex, (entry) => {
           const payload = prepareMetric(entry, metadata);
           this.#onReport(payload);
-          console.log("root api metrics entry", entry, " regex", regex);
+          console.log("root api metrics entry", entry, " regex ", regex, " payload ", payload);
         });
         this.#apiCollectors.push(collector);
       });
