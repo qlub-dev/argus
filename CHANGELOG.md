@@ -1,3 +1,10 @@
+# [1.1.0-beta.8](https://github.com/qlub-dev/argus/compare/v1.1.0-beta.7...v1.1.0-beta.8) (2025-09-08)
+
+
+### Bug Fixes
+
+* **initiator:** convert entry to json for sending to ga ([31ddd30](https://github.com/qlub-dev/argus/commit/31ddd308b9e2a013dcc4fe09564f96849164ab87))
+
 # [1.1.0-beta.7](https://github.com/qlub-dev/argus/compare/v1.1.0-beta.6...v1.1.0-beta.7) (2025-09-08)
 
 
