@@ -1,3 +1,22 @@
+# [1.1.0-beta.4](https://github.com/qlub-dev/argus/compare/v1.1.0-beta.3...v1.1.0-beta.4) (2025-09-08)
+
+
+### Bug Fixes
+
+* **build:** fix rollup build issue ([0ba769c](https://github.com/qlub-dev/argus/commit/0ba769c44fbca05cd37b81f80367ff0e9197eaa3))
+* **configs:** remove cosmic configs ([38bfa1e](https://github.com/qlub-dev/argus/commit/38bfa1e387c7bd3f1222f8b7e6747d626d19facd))
+* **configs:** remove cosmic configs ([d5ee076](https://github.com/qlub-dev/argus/commit/d5ee07664bb5964bb4ae5179cc64057186f0ad45))
+* **tests:** delete cosmic config tests ([88dabd1](https://github.com/qlub-dev/argus/commit/88dabd1cfbd2f4772ba501d92a537c747c87cc23))
+
+
+### Features
+
+* add argus intiator and refactor code ([176657c](https://github.com/qlub-dev/argus/commit/176657c1fe8389ba3e43d9d0c4f1d9b4b942e73a))
+* **collectors:** add api timing collector ([3b41a74](https://github.com/qlub-dev/argus/commit/3b41a74aa969c5c1262693273df58188043d3bc4))
+* **enums:** create an enum for performance entry types ([1b72c75](https://github.com/qlub-dev/argus/commit/1b72c759f4b3168951b0473de243611e30ca8275))
+* **lib:** add observer mgr ([760d9b6](https://github.com/qlub-dev/argus/commit/760d9b66fc213cf30ab6ff07edd1569e02e78129))
+* **utils:** use high precision timing ([8595109](https://github.com/qlub-dev/argus/commit/8595109ed5f90888836e6dbbe12770a150deba09))
+
 # [1.1.0-beta.3](https://github.com/qlub-dev/argus/compare/v1.1.0-beta.2...v1.1.0-beta.3) (2025-09-07)
 
 
