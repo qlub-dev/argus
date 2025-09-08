@@ -1,28 +1,40 @@
-import { onCLS, onFCP, onINP, onLCP, onTTFB } from "web-vitals";
-import type { Metric } from "web-vitals";
+import { createApiTimingCollector } from "./collectors/api-timing";
+import { reportWebVitals } from "./collectors/web-vitals";
+import { loadConfigs } from "./configs";
 import type { OnReportCb } from "./types";
+import type { ArgusConfig } from "./types/configs";
+import { prepareMetric } from "./utils";
 
-console.log("Argus Initiated");
+export class Argus {
+  #config!: ArgusConfig;
+  #apiCollectors: { disconnect: () => void }[] = [];
+  #onReport: OnReportCb;
 
-const METRIC_HANDLERS = [onCLS, onINP, onLCP, onFCP, onTTFB];
+  constructor(onReport: OnReportCb) {
+    this.#onReport = onReport;
+  }
 
-const prepareMetric = (metric: Record<string, any>, metadata?: Record<string, any>) => {
-  return {
-    agent: "argus",
-    event: "performance_metric",
-    preparedAt: new Date().getTime(),
-    ...metric,
-    ...(metadata ?? {})
-  };
-};
+  async init(metadata?: Record<string, any>) {
+    this.#config = await loadConfigs();
 
-const generateReportHandler = (onReportCb: OnReportCb, metadata?: Record<string, any>) => (metric: Metric) => {
-  const metricPayload = prepareMetric(metric, metadata);
-  console.log("Argus log: ", metric);
-  onReportCb(metricPayload);
-};
+    if (this.#config.webVitals?.enabled) {
+      reportWebVitals(this.#onReport, metadata);
+    }
 
-export const reportWebVitals = (onReport: OnReportCb, metadata?: Record<string, any>) => {
-  const reportHandler = generateReportHandler(onReport, metadata);
-  METRIC_HANDLERS.forEach((register) => register(reportHandler));
-};
+    if (this.#config.apiTiming?.enabled && Array.isArray(this.#config.apiTiming.trackers)) {
+      this.#config.apiTiming.trackers.forEach((tracker: { regex: RegExp }) => {
+        const regex = new RegExp(tracker.regex);
+        const collector = createApiTimingCollector(regex, (entry) => {
+          const payload = prepareMetric(entry, metadata);
+          this.#onReport(payload);
+        });
+        this.#apiCollectors.push(collector);
+      });
+    }
+  }
+
+  shutdown() {
+    this.#apiCollectors.forEach((c) => c.disconnect());
+    this.#apiCollectors = [];
+  }
+}

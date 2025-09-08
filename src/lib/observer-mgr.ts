@@ -2,21 +2,21 @@ import type { PerformanceEntryType } from "../enums";
 import type { OnPerformanceEntryMeasure } from "../types";
 
 export class ObserverMgr {
-  private static instance: ObserverMgr;
-  private observers: Map<PerformanceEntryType, PerformanceObserver>;
-  private handlers: Map<PerformanceEntryType, OnPerformanceEntryMeasure[]>;
+  static #instance: ObserverMgr;
+  #observers: Map<PerformanceEntryType, PerformanceObserver>;
+  #handlers: Map<PerformanceEntryType, OnPerformanceEntryMeasure[]>;
 
   private constructor() {
-    this.observers = new Map();
-    this.handlers = new Map();
+    this.#observers = new Map();
+    this.#handlers = new Map();
   }
 
   static getInstance() {
-    if (!ObserverMgr.instance) {
-      ObserverMgr.instance = new ObserverMgr();
+    if (!ObserverMgr.#instance) {
+      ObserverMgr.#instance = new ObserverMgr();
     }
 
-    return ObserverMgr.instance;
+    return ObserverMgr.#instance;
   }
 
   observe(type: PerformanceEntryType, handler: OnPerformanceEntryMeasure) {
@@ -25,34 +25,34 @@ export class ObserverMgr {
       return;
     }
 
-    if (!this.handlers.has(type)) this.handlers.set(type, []);
-    this.handlers.get(type)!.push(handler);
+    if (!this.#handlers.has(type)) this.#handlers.set(type, []);
+    this.#handlers.get(type)!.push(handler);
 
-    if (!this.observers.has(type)) {
+    if (!this.#observers.has(type)) {
       const observer = new PerformanceObserver((list) => {
         for (const entry of list.getEntries()) {
-          this.handlers.get(type)?.forEach((h) => h(entry));
+          this.#handlers.get(type)?.forEach((h) => h(entry));
         }
       });
 
       observer.observe({ type, buffered: true });
-      this.observers.set(type, observer);
+      this.#observers.set(type, observer);
     }
   }
 
   getObserver(type: PerformanceEntryType) {
-    return this.observers.get(type);
+    return this.#observers.get(type);
   }
 
   disconnect(type?: PerformanceEntryType) {
     if (type) {
-      this.observers.get(type)?.disconnect();
-      this.observers.delete(type);
-      this.handlers.delete(type);
+      this.#observers.get(type)?.disconnect();
+      this.#observers.delete(type);
+      this.#handlers.delete(type);
     } else {
-      this.observers.forEach((obs) => obs.disconnect());
-      this.observers.clear();
-      this.handlers.clear();
+      this.#observers.forEach((obs) => obs.disconnect());
+      this.#observers.clear();
+      this.#handlers.clear();
     }
   }
 }
