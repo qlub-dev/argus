@@ -37,7 +37,8 @@ export class Argus {
       this.#config.apiTiming.trackers.forEach((tracker: { regex: RegExp | string }) => {
         const regex = tracker.regex instanceof RegExp ? tracker.regex : new RegExp(tracker.regex);
         const collector = createApiTimingCollector(regex, (entry) => {
-          const payload = prepareMetric(entry, metadata);
+          const jsonEntry = entry.toJSON();
+          const payload = prepareMetric(jsonEntry, metadata);
           this.#onReport(payload);
           console.log("root api metrics entry", entry, " regex ", regex, " payload ", payload);
         });
