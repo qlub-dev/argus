@@ -1,8 +1,8 @@
-import { cosmiconfig } from "cosmiconfig";
+import cosmiconfig from "cosmiconfig";
 import { defaultConfigs } from "./defaults";
 
 const loadConfigs = async () => {
-  const explorer = cosmiconfig("argus");
+  const explorer = cosmiconfig.cosmiconfig("argus");
 
   try {
     const result = await explorer.search();
