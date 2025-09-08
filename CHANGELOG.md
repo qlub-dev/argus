@@ -1,3 +1,10 @@
+# [1.1.0-beta.5](https://github.com/qlub-dev/argus/compare/v1.1.0-beta.4...v1.1.0-beta.5) (2025-09-08)
+
+
+### Features
+
+* add singleton to argus initiator ([e5a2d7b](https://github.com/qlub-dev/argus/commit/e5a2d7ba3f69ebeacbe9d12a413e335dde2d64fb))
+
 # [1.1.0-beta.4](https://github.com/qlub-dev/argus/compare/v1.1.0-beta.3...v1.1.0-beta.4) (2025-09-08)
 
 
