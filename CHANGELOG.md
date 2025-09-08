@@ -1,3 +1,10 @@
+# [1.1.0-beta.6](https://github.com/qlub-dev/argus/compare/v1.1.0-beta.5...v1.1.0-beta.6) (2025-09-08)
+
+
+### Bug Fixes
+
+* add logs for monitoring ([5e55bde](https://github.com/qlub-dev/argus/commit/5e55bde54fdd6084148a3387ee2389f575e6014f))
+
 # [1.1.0-beta.5](https://github.com/qlub-dev/argus/compare/v1.1.0-beta.4...v1.1.0-beta.5) (2025-09-08)
 
 
