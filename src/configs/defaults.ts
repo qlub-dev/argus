@@ -11,7 +11,7 @@ export const defaultConfigs: ArgusConfig = {
     samplingRate: 0.5,
     trackers: [
       {
-        regex: new RegExp(".*")
+        regex: new RegExp("/api")
       }
     ]
   }
