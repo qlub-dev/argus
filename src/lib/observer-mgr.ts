@@ -1,9 +1,10 @@
 import type { PerformanceEntryType } from "../enums";
+import type { OnPerformanceEntryMeasure } from "../types";
 
 export class ObserverMgr {
   private static instance: ObserverMgr;
   private observers: Map<PerformanceEntryType, PerformanceObserver>;
-  private handlers: Map<PerformanceEntryType, ((entry: PerformanceEntry) => void)[]>;
+  private handlers: Map<PerformanceEntryType, OnPerformanceEntryMeasure[]>;
 
   private constructor() {
     this.observers = new Map();
@@ -18,7 +19,7 @@ export class ObserverMgr {
     return ObserverMgr.instance;
   }
 
-  observe(type: PerformanceEntryType, handler: (entry: PerformanceEntry) => void) {
+  observe(type: PerformanceEntryType, handler: OnPerformanceEntryMeasure) {
     if (!PerformanceObserver.supportedEntryTypes.includes(type)) {
       console.warn(`Entry of type "${type}" is not supported in this browser`);
       return;
