@@ -1,6 +1,6 @@
 import { reportWebVitals } from "./collectors/web-vitals";
 import { loadConfigs } from "./configs";
-import { handleApiTimingMetricColelction } from "./handlers/api-timing";
+import { handleApiTimingMetricCollection } from "./handlers/api-timing";
 import type { OnReportCb } from "./types";
 import type { ArgusConfig } from "./types/configs";
 
@@ -28,7 +28,7 @@ export class Argus {
     if (this.#config.apiTiming?.enabled && Array.isArray(this.#config.apiTiming.trackers)) {
       this.#config.apiTiming.trackers.forEach((tracker) => {
         this.#apiCollectors.push(
-          handleApiTimingMetricColelction(
+          handleApiTimingMetricCollection(
             tracker,
             this.#onReport,
             metadata,

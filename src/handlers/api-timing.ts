@@ -3,7 +3,7 @@ import type { OnReportCb } from "../types";
 import type { Tracker } from "../types/configs";
 import { prepareMetric } from "../utils";
 
-export const handleApiTimingMetricColelction = (
+export const handleApiTimingMetricCollection = (
   tracker: Tracker,
   onReport: OnReportCb,
   metadata?: Record<string, any>,
