@@ -18,7 +18,6 @@ export const handleApiTimingMetricCollection = (
       ...(tracker?.label ? { label: tracker?.label } : {})
     });
     onReport(payload);
-    console.log("root api metrics entry", entry, " regex ", regex, " payload ", payload);
   };
 
   return createApiTimingCollector(regex, handler, tracker?.lowerBound, tracker?.upperBound, samplingRate);
