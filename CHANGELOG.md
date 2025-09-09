@@ -1,3 +1,23 @@
+# [1.1.0-beta.9](https://github.com/qlub-dev/argus/compare/v1.1.0-beta.8...v1.1.0-beta.9) (2025-09-09)
+
+
+### Bug Fixes
+
+* **tests:** update error message in test ([0ddd9a2](https://github.com/qlub-dev/argus/commit/0ddd9a2e210302d8b0b31c8439d6669e748542c1))
+
+
+### Features
+
+* add label to event name ([e6da981](https://github.com/qlub-dev/argus/commit/e6da98141a64d7f60a03642c0af5082154411071))
+* **api-timing:** add sampling ([aa45008](https://github.com/qlub-dev/argus/commit/aa45008a6f4b03e7068cf841e00ac24234766ea8))
+* **api-timing:** check whether duration is within provided limits ([2044c3e](https://github.com/qlub-dev/argus/commit/2044c3e2e1eb7f188dae7858498c9ff2fa8cb75e))
+* **configs:** add thresholds to configs ([04acd3b](https://github.com/qlub-dev/argus/commit/04acd3b607b16144553a429d3c5c569d243c26fb))
+* **configs:** allow passing of configs at initation and refactor code ([a488d8c](https://github.com/qlub-dev/argus/commit/a488d8cc8350cba22475371c0a68ae50fbcd7070))
+* **lib:** add util fn to check bounds ([3a786d6](https://github.com/qlub-dev/argus/commit/3a786d6293610eb289a2505c10eef8a07dda9ec6))
+* **lib:** add util for sampling ([48f9112](https://github.com/qlub-dev/argus/commit/48f9112b8d3b7023641f3b6265680e936b24645f))
+* **lib:** add util to get union regex ([707a97c](https://github.com/qlub-dev/argus/commit/707a97c608b0eb14b47c642288d8c1707e196651))
+* **tests:** update tests after renaming fn ([69f2004](https://github.com/qlub-dev/argus/commit/69f2004184d4bff66a8f1731034bd82a6c8134bc))
+
 # [1.1.0-beta.8](https://github.com/qlub-dev/argus/compare/v1.1.0-beta.7...v1.1.0-beta.8) (2025-09-08)
 
 
