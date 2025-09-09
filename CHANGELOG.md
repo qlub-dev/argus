@@ -1,3 +1,10 @@
+# [1.1.0-beta.10](https://github.com/qlub-dev/argus/compare/v1.1.0-beta.9...v1.1.0-beta.10) (2025-09-09)
+
+
+### Bug Fixes
+
+* **types:** export types ([d2e8142](https://github.com/qlub-dev/argus/commit/d2e8142d2e039320a095f3007abb38f82fee62b4))
+
 # [1.1.0-beta.9](https://github.com/qlub-dev/argus/compare/v1.1.0-beta.8...v1.1.0-beta.9) (2025-09-09)
 
 
