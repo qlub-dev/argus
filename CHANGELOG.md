@@ -1,3 +1,15 @@
+# [1.1.0-beta.11](https://github.com/qlub-dev/argus/compare/v1.1.0-beta.10...v1.1.0-beta.11) (2025-09-09)
+
+
+### Bug Fixes
+
+* **api-timing:** apply missed negation ([95da920](https://github.com/qlub-dev/argus/commit/95da920d4557340ef52fd3ce36c9b296f4701980))
+
+
+### Features
+
+* add sampling rate to web-vitals ([543922d](https://github.com/qlub-dev/argus/commit/543922d3587ec1be803fce6f49f2e5cd66e603df))
+
 # [1.1.0-beta.10](https://github.com/qlub-dev/argus/compare/v1.1.0-beta.9...v1.1.0-beta.10) (2025-09-09)
 
 
