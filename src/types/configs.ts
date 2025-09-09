@@ -1,3 +1,9 @@
+export type Tracker = {
+  regex: RegExp;
+  label?: string;
+  threshold?: number;
+};
+
 export type ArgusConfig = {
   samplingRate?: number;
   webVitals?: {
@@ -7,9 +13,6 @@ export type ArgusConfig = {
   apiTiming?: {
     enabled: boolean;
     samplingRate?: number;
-    trackers?: {
-      regex: RegExp;
-      label?: string;
-    }[];
+    trackers?: Tracker[];
   };
 };

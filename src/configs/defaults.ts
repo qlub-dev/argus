@@ -11,7 +11,9 @@ export const defaultConfigs: ArgusConfig = {
     samplingRate: 0.5,
     trackers: [
       {
-        regex: new RegExp("/api")
+        regex: new RegExp("/api"),
+        label: "api-timing-metric",
+        threshold: 1000
       }
     ]
   }
