@@ -44,3 +44,5 @@ export class Argus {
     this.#apiCollectors = [];
   }
 }
+
+export * from "./types";
