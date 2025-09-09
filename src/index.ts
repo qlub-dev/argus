@@ -23,18 +23,17 @@ export class Argus {
   }
 
   async init(metadata?: Record<string, any>) {
-    if (this.#config.webVitals?.enabled) reportWebVitals(this.#onReport, metadata);
+    const _config = this.#config;
 
-    if (this.#config.apiTiming?.enabled && Array.isArray(this.#config.apiTiming.trackers)) {
+    if (this.#config.webVitals?.enabled) {
+      const samplingRate = _config?.webVitals?.samplingRate ?? _config?.samplingRate;
+      reportWebVitals(this.#onReport, metadata, samplingRate);
+    }
+
+    if (this.#config.apiTiming?.enabled && Array.isArray(this.#config?.apiTiming.trackers)) {
       this.#config.apiTiming.trackers.forEach((tracker) => {
-        this.#apiCollectors.push(
-          handleApiTimingMetricCollection(
-            tracker,
-            this.#onReport,
-            metadata,
-            tracker?.samplingRate ?? this.#config?.samplingRate
-          )
-        );
+        const samplingRate = tracker?.samplingRate ?? _config?.apiTiming?.samplingRate ?? _config?.samplingRate;
+        this.#apiCollectors.push(handleApiTimingMetricCollection(tracker, this.#onReport, metadata, samplingRate));
       });
     }
   }

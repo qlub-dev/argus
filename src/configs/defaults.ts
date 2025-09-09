@@ -8,12 +8,11 @@ export const defaultConfigs: ArgusConfig = {
   },
   apiTiming: {
     enabled: true,
-    samplingRate: 0.5,
     trackers: [
       {
         regex: new RegExp("/api"),
         label: "api-timing-metric",
-        lowerBound: 1000,
+        lowerBound: 1000
       }
     ]
   }
