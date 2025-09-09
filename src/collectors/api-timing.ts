@@ -1,24 +1,23 @@
 import { PerformanceEntryType } from "../enums";
+import { checkValueWithinBounds } from "../lib/check-value-bounds";
+import { evaluateSamplingChance } from "../lib/evaluate-sampling";
 import { ObserverMgr } from "../lib/observer-mgr";
 
-export function createApiTimingCollector(regex: RegExp, callback: (entry: PerformanceResourceTiming) => void) {
+export function createApiTimingCollector(
+  regex: RegExp,
+  callback: (entry: PerformanceResourceTiming) => void,
+  lowerBound?: number,
+  upperBound?: number,
+  samplingRate?: number
+) {
   const mgr = ObserverMgr.getInstance();
 
-  console.trace("api timing collector created");
-
   const handler = (entry: PerformanceEntry) => {
-    console.trace("atc h 1 ", entry);
     if (!(entry instanceof PerformanceResourceTiming)) return;
-    console.trace("atc h 2 ", entry);
-    if (entry.initiatorType !== "fetch" && entry.initiatorType !== "xmlhttprequest") {
-      return;
-    }
-    console.trace("atc h 3 ", entry);
-
-    if (!regex.test(entry.name)) {
-      return;
-    }
-    console.trace("atc h 4 ", entry);
+    if (entry.initiatorType !== "fetch" && entry.initiatorType !== "xmlhttprequest") return;
+    if (!regex.test(entry.name)) return;
+    if (checkValueWithinBounds(entry.duration, lowerBound, upperBound)) return;
+    if (!evaluateSamplingChance(samplingRate ?? 1)) return;
 
     callback(entry);
   };
