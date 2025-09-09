@@ -46,7 +46,15 @@ export class Argus {
           console.log("root api metrics entry", entry, " regex ", regex, " payload ", payload);
         };
 
-        const collector = createApiTimingCollector(regex, handler, tracker?.lowerBound, tracker?.upperBound);
+        const samplingRate = tracker?.samplingRate ?? this.#config?.samplingRate;
+
+        const collector = createApiTimingCollector(
+          regex,
+          handler,
+          tracker?.lowerBound,
+          tracker?.upperBound,
+          samplingRate
+        );
 
         this.#apiCollectors.push(collector);
       });

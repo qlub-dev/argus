@@ -3,6 +3,7 @@ export type Tracker = {
   label?: string;
   lowerBound?: number;
   upperBound?: number;
+  samplingRate?: number;
 };
 
 export type ArgusConfig = {
