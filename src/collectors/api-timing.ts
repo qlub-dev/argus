@@ -16,7 +16,7 @@ export function createApiTimingCollector(
     if (!(entry instanceof PerformanceResourceTiming)) return;
     if (entry.initiatorType !== "fetch" && entry.initiatorType !== "xmlhttprequest") return;
     if (!regex.test(entry.name)) return;
-    if (checkValueWithinBounds(entry.duration, lowerBound, upperBound)) return;
+    if (!checkValueWithinBounds(entry.duration, lowerBound, upperBound)) return;
     if (!evaluateSamplingChance(samplingRate ?? 1)) return;
 
     callback(entry);
