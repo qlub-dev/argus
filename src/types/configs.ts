@@ -1,7 +1,8 @@
 export type Tracker = {
   regex: RegExp;
   label?: string;
-  threshold?: number;
+  lowerBound?: number;
+  upperBound?: number;
 };
 
 export type ArgusConfig = {

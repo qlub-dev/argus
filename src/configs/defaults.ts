@@ -13,7 +13,7 @@ export const defaultConfigs: ArgusConfig = {
       {
         regex: new RegExp("/api"),
         label: "api-timing-metric",
-        threshold: 1000
+        lowerBound: 1000,
       }
     ]
   }
