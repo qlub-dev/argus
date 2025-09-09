@@ -2,11 +2,11 @@ import { createUnionRegex } from "../../src/lib/union-regex";
 
 describe("createUnionRegex", () => {
   it("throws if input is not an array", () => {
-    expect(() => createUnionRegex("not-an-array" as any)).toThrow("Provide an array of regexes");
+    expect(() => createUnionRegex("not-an-array" as any)).toThrow("Missing regex array");
   });
 
   it("throws if array is empty", () => {
-    expect(() => createUnionRegex([])).toThrow("Provide an array of regexes");
+    expect(() => createUnionRegex([])).toThrow("Missing regex array");
   });
 
   it("matches any of the provided regexes", () => {
