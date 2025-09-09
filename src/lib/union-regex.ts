@@ -1,4 +1,4 @@
-export const unionRegex = (regexes: RegExp[], flags?: string): RegExp => {
+export const createUnionRegex = (regexes: RegExp[], flags?: string): RegExp => {
   if (!Array.isArray(regexes) || regexes.length === 0) {
     throw new Error("Provide an array of regexes");
   }
