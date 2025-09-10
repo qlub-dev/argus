@@ -1,8 +1,8 @@
-import type { PerformanceEntryType } from "../enums";
-import type { OnPerformanceEntryMeasure } from "../types";
+import type { PerformanceEntryType } from "./enums";
+import type { OnPerformanceEntryMeasure } from "./types";
 
-export class ObserverMgr {
-  static #instance: ObserverMgr;
+export class Engine {
+  static #instance: Engine;
   #observers: Map<PerformanceEntryType, PerformanceObserver>;
   #handlers: Map<PerformanceEntryType, OnPerformanceEntryMeasure[]>;
 
@@ -12,11 +12,11 @@ export class ObserverMgr {
   }
 
   static getInstance() {
-    if (!ObserverMgr.#instance) {
-      ObserverMgr.#instance = new ObserverMgr();
+    if (!Engine.#instance) {
+      Engine.#instance = new Engine();
     }
 
-    return ObserverMgr.#instance;
+    return Engine.#instance;
   }
 
   observe(type: PerformanceEntryType, handler: OnPerformanceEntryMeasure) {

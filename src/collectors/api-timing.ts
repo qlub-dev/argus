@@ -1,7 +1,7 @@
+import { Engine } from "../engine";
 import { PerformanceEntryType } from "../enums";
 import { checkValueWithinBounds } from "../lib/check-value-bounds";
 import { evaluateSamplingChance } from "../lib/evaluate-sampling";
-import { ObserverMgr } from "../lib/observer-mgr";
 
 export function createApiTimingCollector(
   regex: RegExp,
@@ -10,7 +10,7 @@ export function createApiTimingCollector(
   upperBound?: number,
   samplingRate?: number
 ) {
-  const mgr = ObserverMgr.getInstance();
+  const engine = Engine.getInstance();
 
   const handler = (entry: PerformanceEntry) => {
     if (!(entry instanceof PerformanceResourceTiming)) return;
@@ -22,9 +22,9 @@ export function createApiTimingCollector(
     callback(entry);
   };
 
-  mgr.observe(PerformanceEntryType.RESOURCE, handler);
+  engine.observe(PerformanceEntryType.RESOURCE, handler);
 
   return {
-    disconnect: () => mgr.disconnect(PerformanceEntryType.RESOURCE)
+    disconnect: () => engine.disconnect(PerformanceEntryType.RESOURCE)
   };
 }
