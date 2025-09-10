@@ -60,6 +60,25 @@ export const argusConfig: ArgusConfig = {
 
 ```
 
+2. Add this to the root of your application following the given format. This example is for Next.js pages router. Add this code in _app.tsx file.
+
+```ts
+
+    const argusInstance = Argus.getInstance((payload) => console.log(payload), argusConfig);
+
+    useEffect(() => {
+        argusInstance.init({
+            additionalData,
+        });
+
+        return argusInstance.shutdown;
+    }, [additionalData]);
+
+
+```
+
+This package is written in pure JavaScript, making it compatible with any project that supports JS—including frameworks like React and Next.js. While we haven’t yet documented specific integration guides for all supported environments, we welcome and encourage contributions via pull requests.
+
 ## Development Setup
 
 - Install [pnpm](https://pnpm.io/installation).
