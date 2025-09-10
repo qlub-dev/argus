@@ -24,6 +24,42 @@ bun add @qlub-dev/argus
 
 ## Usage
 
+1. Add a config file at the root following this format.
+
+```ts
+
+import type { ArgusConfig } from '@qlub-dev/argus';
+
+export const argusConfig: ArgusConfig = {
+    samplingRate: 1,
+    webVitals: {
+        enabled: true,
+        samplingRate: 1,
+    },
+    apiTiming: {
+        enabled: true,
+        samplingRate: 1,
+        trackers: [
+            {
+                regex: new RegExp('/gods'),
+                label: 'fetch_greek_gods',
+                lowerBound: 200,
+                upperBound: 800,
+                samplingRate: 0.7
+            },
+            {
+                regex: new RegExp('/philosophers'),
+                label: 'fetch_philosophers',
+                lowerBound: 100,
+                upperBound: 900,
+                samplingRate: 0.3
+            },
+        ],
+    },
+};
+
+```
+
 ## Development Setup
 
 - Install [pnpm](https://pnpm.io/installation).
