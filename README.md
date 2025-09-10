@@ -21,6 +21,7 @@ pnpm add @qlub-dev/argus
 ```bash
 bun add @qlub-dev/argus
 ```
+You might need to add an .npmrc inclduing a token with read access from @qlub-dev registry.
 
 ## Usage
 
