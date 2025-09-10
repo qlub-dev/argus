@@ -1,21 +1,46 @@
-import { onCLS, onINP, onLCP } from "web-vitals";
-import type { Metric } from "web-vitals";
+import { reportWebVitals } from "./collectors/web-vitals";
+import { loadConfigs } from "./configs";
+import { handleApiTimingMetricCollection } from "./handlers/api-timing";
+import type { ArgusConfig, OnReportCb } from "./types";
 
-console.log("Argus Initiated");
+export class Argus {
+  static #instance: Argus | null = null;
 
-const sendToAnalytics = (metric: Metric) => {
-  const body = JSON.stringify({
-    agent: "Argus",
-    ...metric
-  });
+  #config: ArgusConfig;
+  #apiCollectors: { disconnect: () => void }[] = [];
+  #onReport: OnReportCb;
 
-  console.log("Argus log: ", metric);
+  private constructor(onReport: OnReportCb, config: ArgusConfig) {
+    this.#onReport = onReport;
+    this.#config = config;
+  }
 
-  // Use `navigator.sendBeacon()` to send the data, which supports
-  // sending while the page is unloading.
-  navigator.sendBeacon("/analytics", body);
-};
+  static getInstance(onReport: OnReportCb, config: ArgusConfig) {
+    const _config = loadConfigs(config);
+    if (!Argus.#instance) Argus.#instance = new Argus(onReport, _config);
+    return Argus.#instance;
+  }
 
-onCLS(sendToAnalytics);
-onINP(sendToAnalytics);
-onLCP(sendToAnalytics);
+  async init(metadata?: Record<string, any>) {
+    const _config = this.#config;
+
+    if (this.#config.webVitals?.enabled) {
+      const samplingRate = _config?.webVitals?.samplingRate ?? _config?.samplingRate;
+      reportWebVitals(this.#onReport, metadata, samplingRate);
+    }
+
+    if (this.#config.apiTiming?.enabled && Array.isArray(this.#config?.apiTiming.trackers)) {
+      this.#config.apiTiming.trackers.forEach((tracker) => {
+        const samplingRate = tracker?.samplingRate ?? _config?.apiTiming?.samplingRate ?? _config?.samplingRate;
+        this.#apiCollectors.push(handleApiTimingMetricCollection(tracker, this.#onReport, metadata, samplingRate));
+      });
+    }
+  }
+
+  shutdown() {
+    this.#apiCollectors.forEach((c) => c.disconnect());
+    this.#apiCollectors = [];
+  }
+}
+
+export * from "./types";
