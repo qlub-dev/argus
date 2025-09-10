@@ -2,7 +2,7 @@
 
 Argus, named after a many-eyed giant in Greek mythology renowned for his unyielding vigilance, keeps a constant watch over your application, collecting key metrics related to web performance.
 
-[This document](https://paybyclub.atlassian.net/wiki/spaces/CA/pages/1522401289/Argus+-+Web+Performance+Metric+Collector) contains the proposal of this library. Currently only a part of it has been implemented including web vitals and api call times. Rest will be implemented soon.
+[This](https://paybyclub.atlassian.net/wiki/spaces/CA/pages/1522401289/Argus+-+Web+Performance+Metric+Collector) proposal outlines the full vision for this library. At present, only a portion has been implemented—covering Web Vitals and API call timings. The remaining features are planned and will be added in future releases.
 
 ## Installation
 
