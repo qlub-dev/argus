@@ -67,7 +67,10 @@ export const argusConfig: ArgusConfig = {
 
 ```ts
 
-    const argusInstance = Argus.getInstance((payload) => console.log(payload), argusConfig);
+    // add a suitable metric handler
+    const handleMetricReport = (metric: Record<string,any>) => console.log(metric)
+
+    const argusInstance = Argus.getInstance(handleMetricReport, argusConfig);
 
     useEffect(() => {
         argusInstance.init({
