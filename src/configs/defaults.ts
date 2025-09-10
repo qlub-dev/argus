@@ -1,4 +1,4 @@
-import type { ArgusConfig } from "../types/configs";
+import type { ArgusConfig } from "../types";
 
 export const defaultConfigs: ArgusConfig = {
   samplingRate: 0.5,

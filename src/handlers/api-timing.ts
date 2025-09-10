@@ -1,6 +1,6 @@
 import { createApiTimingCollector } from "../collectors/api-timing";
 import type { OnReportCb } from "../types";
-import type { Tracker } from "../types/configs";
+import type { Tracker } from "../types";
 import { prepareMetric } from "../utils";
 
 export const handleApiTimingMetricCollection = (

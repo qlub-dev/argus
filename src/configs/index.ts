@@ -1,4 +1,4 @@
-import type { ArgusConfig } from "../types/configs";
+import type { ArgusConfig } from "../types";
 import { defaultConfigs } from "./defaults";
 
 export const loadConfigs = (configs: Partial<ArgusConfig>): ArgusConfig => {

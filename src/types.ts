@@ -1,3 +1,7 @@
+export type OnReportCb = (payload: Record<string, any>) => void;
+
+export type OnPerformanceEntryMeasure = (entry: PerformanceEntry) => void;
+
 export type Tracker = {
   regex: RegExp;
   label?: string;

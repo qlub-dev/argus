@@ -1,8 +1,7 @@
 import { reportWebVitals } from "./collectors/web-vitals";
 import { loadConfigs } from "./configs";
 import { handleApiTimingMetricCollection } from "./handlers/api-timing";
-import type { OnReportCb } from "./types";
-import type { ArgusConfig } from "./types/configs";
+import type { ArgusConfig, OnReportCb } from "./types";
 
 export class Argus {
   static #instance: Argus | null = null;
