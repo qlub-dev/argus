@@ -1,3 +1,11 @@
+# [1.2.0-beta.3](https://github.com/qlub-dev/argus/compare/v1.2.0-beta.2...v1.2.0-beta.3) (2025-09-18)
+
+
+### Bug Fixes
+
+* correct import for user timing collector and update entry type in handler ([d4e74cf](https://github.com/qlub-dev/argus/commit/d4e74cf0bb3d4649ec6d4a12e77d10aec8ef7485))
+* streamline user timing collector logic and improve metric handling ([de94651](https://github.com/qlub-dev/argus/commit/de94651c52e279f303bdb5ca55ea50b307066f8b))
+
 # [1.2.0-beta.2](https://github.com/qlub-dev/argus/compare/v1.2.0-beta.1...v1.2.0-beta.2) (2025-09-18)
 
 
