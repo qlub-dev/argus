@@ -87,4 +87,23 @@ export type ArgusConfig = {
      */
     trackers?: Tracker[];
   };
+  /**
+   * Configuration for User timing metric collection. Wraps around user timing browser API
+   */
+  userTiming?: {
+    /**
+     * Enable or disable API timing tracking.
+     * Default: `false`.
+     */
+    enabled?: boolean;
+    /**
+     * Sampling rate for User timing metrics (0–1).
+     * Overrides the global sampling rate if provided.
+     */
+    samplingRate?: number;
+    /**
+     * List of trackers to apply for matching and filtering metrics.
+     */
+    trackers?: Tracker[];
+  };
 };

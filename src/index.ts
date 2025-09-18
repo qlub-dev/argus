@@ -1,6 +1,7 @@
 import { reportWebVitals } from "./collectors/web-vitals";
 import { loadConfigs } from "./configs";
 import { handleApiTimingMetricCollection } from "./handlers/api-timing";
+import { handleUserTimingMetricCollection } from "./handlers/user-timing";
 import type { ArgusConfig, OnReportCb } from "./types";
 
 export class Argus {
@@ -8,6 +9,7 @@ export class Argus {
 
   #config: ArgusConfig;
   #apiCollectors: { disconnect: () => void }[] = [];
+  #userTimingCollectors: { disconnect: () => void }[] = [];
   #onReport: OnReportCb;
 
   private constructor(onReport: OnReportCb, config: ArgusConfig) {
@@ -33,6 +35,13 @@ export class Argus {
       this.#config.apiTiming.trackers.forEach((tracker) => {
         const samplingRate = tracker?.samplingRate ?? _config?.apiTiming?.samplingRate ?? _config?.samplingRate;
         this.#apiCollectors.push(handleApiTimingMetricCollection(tracker, this.#onReport, metadata, samplingRate));
+      });
+    }
+
+    if (this.#config.userTiming?.enabled && Array.isArray(this.#config?.userTiming.trackers)) {
+      this.#config.userTiming.trackers.forEach((tracker) => {
+        const samplingRate = tracker?.samplingRate ?? _config?.userTiming?.samplingRate ?? _config?.samplingRate;
+        this.#apiCollectors.push(handleUserTimingMetricCollection(tracker, this.#onReport, metadata, samplingRate));
       });
     }
   }

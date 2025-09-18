@@ -15,5 +15,8 @@ export const defaultConfigs: ArgusConfig = {
         lowerBound: 1000
       }
     ]
+  },
+  userTiming: {
+    enabled: false
   }
 };
