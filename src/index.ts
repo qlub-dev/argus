@@ -41,7 +41,9 @@ export class Argus {
     if (this.#config.userTiming?.enabled && Array.isArray(this.#config?.userTiming.trackers)) {
       this.#config.userTiming.trackers.forEach((tracker) => {
         const samplingRate = tracker?.samplingRate ?? _config?.userTiming?.samplingRate ?? _config?.samplingRate;
-        this.#apiCollectors.push(handleUserTimingMetricCollection(tracker, this.#onReport, metadata, samplingRate));
+        this.#userTimingCollectors.push(
+          handleUserTimingMetricCollection(tracker, this.#onReport, metadata, samplingRate)
+        );
       });
     }
   }
@@ -49,6 +51,8 @@ export class Argus {
   shutdown() {
     this.#apiCollectors.forEach((c) => c.disconnect());
     this.#apiCollectors = [];
+    this.#userTimingCollectors.forEach((c) => c.disconnect());
+    this.#userTimingCollectors = [];
   }
 }
 
