@@ -1,3 +1,15 @@
+# [1.2.0-beta.1](https://github.com/qlub-dev/argus/compare/v1.1.0...v1.2.0-beta.1) (2025-09-18)
+
+
+### Bug Fixes
+
+* **collectors:** disconnect proper types and return if releveant types are not matched ([06a953c](https://github.com/qlub-dev/argus/commit/06a953c8aadd2a7cdc83a8f12657f048762ff331))
+
+
+### Features
+
+* user timing metric collection added ([b76abab](https://github.com/qlub-dev/argus/commit/b76abab752ee85838b44deb5704e663e66581ea1))
+
 # [1.1.0](https://github.com/qlub-dev/argus/compare/v1.0.3...v1.1.0) (2025-09-10)
 
 
