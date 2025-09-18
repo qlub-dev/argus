@@ -1,4 +1,4 @@
-import { createApiTimingCollector as createUserTimingCollector } from "../collectors/api-timing";
+import { createUserTimingCollector } from "../collectors/user-timing";
 import type { OnReportCb } from "../types";
 import type { Tracker } from "../types";
 import { prepareMetric } from "../utils";
@@ -11,7 +11,7 @@ export const handleUserTimingMetricCollection = (
 ) => {
   const regex = tracker.regex instanceof RegExp ? tracker.regex : new RegExp(tracker.regex);
 
-  const handler = (entry: PerformanceResourceTiming) => {
+  const handler = (entry: PerformanceEntry) => {
     const jsonEntry = entry.toJSON();
     const payload = prepareMetric(jsonEntry, {
       ...metadata,
