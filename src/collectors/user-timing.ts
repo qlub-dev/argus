@@ -5,7 +5,7 @@ import { evaluateSamplingChance } from "../lib/evaluate-sampling";
 
 export function createUserTimingCollector(
   regex: RegExp,
-  callback: (entry: PerformanceResourceTiming) => void,
+  callback: (entry: PerformanceEntry) => void,
   lowerBound?: number,
   upperBound?: number,
   samplingRate?: number
@@ -13,7 +13,7 @@ export function createUserTimingCollector(
   const engine = Engine.getInstance();
 
   const handler = (entry: PerformanceEntry) => {
-    if (!(entry instanceof PerformanceResourceTiming)) return;
+    if (!(entry instanceof PerformanceMark) && !(entry instanceof PerformanceMeasure)) return;
     if (!regex.test(entry.name)) return;
     if (
       !(
@@ -31,6 +31,9 @@ export function createUserTimingCollector(
   engine.observe(PerformanceEntryType.MARK, handler);
 
   return {
-    disconnect: () => engine.disconnect(PerformanceEntryType.RESOURCE)
+    disconnect: () => {
+      engine.disconnect(PerformanceEntryType.MARK);
+      engine.disconnect(PerformanceEntryType.MEASURE);
+    }
   };
 }
