@@ -1,3 +1,10 @@
+# [1.2.0-beta.2](https://github.com/qlub-dev/argus/compare/v1.2.0-beta.1...v1.2.0-beta.2) (2025-09-18)
+
+
+### Bug Fixes
+
+* correct user timing collectors assignment and ensure proper shutdown ([04069f0](https://github.com/qlub-dev/argus/commit/04069f06ea2b73976a1b650f1965f4231ab12291))
+
 # [1.2.0-beta.1](https://github.com/qlub-dev/argus/compare/v1.1.0...v1.2.0-beta.1) (2025-09-18)
 
 
