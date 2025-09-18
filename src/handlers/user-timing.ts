@@ -1,4 +1,4 @@
-import { createApiTimingCollector } from "../collectors/api-timing";
+import { createApiTimingCollector as createUserTimingCollector } from "../collectors/api-timing";
 import type { OnReportCb } from "../types";
 import type { Tracker } from "../types";
 import { prepareMetric } from "../utils";
@@ -20,5 +20,5 @@ export const handleUserTimingMetricCollection = (
     onReport(payload);
   };
 
-  return createApiTimingCollector(regex, handler, tracker?.lowerBound, tracker?.upperBound, samplingRate);
+  return createUserTimingCollector(regex, handler, tracker?.lowerBound, tracker?.upperBound, samplingRate);
 };

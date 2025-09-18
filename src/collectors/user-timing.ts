@@ -13,26 +13,18 @@ export function createUserTimingCollector(
   const engine = Engine.getInstance();
 
   const handler = (entry: PerformanceEntry) => {
-    if (!(entry instanceof PerformanceMark) && !(entry instanceof PerformanceMeasure)) return;
+    if (!(entry instanceof PerformanceMeasure)) return;
     if (!regex.test(entry.name)) return;
-    if (
-      !(
-        entry.entryType === PerformanceEntryType.MEASURE &&
-        checkValueWithinBounds(entry.duration, lowerBound, upperBound)
-      )
-    )
-      return;
-    if (!(entry.entryType === PerformanceEntryType.MEASURE && evaluateSamplingChance(samplingRate ?? 1))) return;
+    if (checkValueWithinBounds(entry.duration, lowerBound, upperBound)) return;
+    if (evaluateSamplingChance(samplingRate ?? 1)) return;
 
     callback(entry);
   };
 
   engine.observe(PerformanceEntryType.MEASURE, handler);
-  engine.observe(PerformanceEntryType.MARK, handler);
 
   return {
     disconnect: () => {
-      engine.disconnect(PerformanceEntryType.MARK);
       engine.disconnect(PerformanceEntryType.MEASURE);
     }
   };

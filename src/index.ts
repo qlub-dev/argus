@@ -57,3 +57,4 @@ export class Argus {
 }
 
 export * from "./types";
+export { markUserTimingStart, markUserTimingEnding } from "./utils";
