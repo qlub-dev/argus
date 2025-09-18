@@ -7,3 +7,12 @@ export const prepareMetric = (metric: Record<string, any>, metadata?: Record<str
     ...(metadata ?? {})
   };
 };
+
+export const markUserTimingStart = (id: string) => {
+  performance.mark(`${id}-start`);
+};
+
+export const markUserTimingEnding = (id: string) => {
+  performance.mark(`${id}-end`);
+  performance.measure(`${id}-duration`, `${id}-start`, `${id}-end`);
+};
