@@ -1,3 +1,10 @@
+# [1.2.0-beta.7](https://github.com/qlub-dev/argus/compare/v1.2.0-beta.6...v1.2.0-beta.7) (2025-09-19)
+
+
+### Bug Fixes
+
+* correct logic in checkValueWithinBounds condition in user timing collector ([81ef17c](https://github.com/qlub-dev/argus/commit/81ef17cf6befb1df31605d010af114fad1682090))
+
 # [1.2.0-beta.6](https://github.com/qlub-dev/argus/compare/v1.2.0-beta.5...v1.2.0-beta.6) (2025-09-19)
 
 
