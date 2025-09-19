@@ -1,3 +1,10 @@
+# [1.2.0-beta.6](https://github.com/qlub-dev/argus/compare/v1.2.0-beta.5...v1.2.0-beta.6) (2025-09-19)
+
+
+### Bug Fixes
+
+* add logging to checkValueWithinBounds for better traceability ([ff82b2c](https://github.com/qlub-dev/argus/commit/ff82b2ce43a90b9d8794999b25fe498fbf2f7582))
+
 # [1.2.0-beta.5](https://github.com/qlub-dev/argus/compare/v1.2.0-beta.4...v1.2.0-beta.5) (2025-09-19)
 
 
