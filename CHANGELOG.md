@@ -1,3 +1,10 @@
+# [1.2.0-beta.8](https://github.com/qlub-dev/argus/compare/v1.2.0-beta.7...v1.2.0-beta.8) (2025-09-19)
+
+
+### Bug Fixes
+
+* correct sampling chance evaluation logic in user timing collector ([ea62ebc](https://github.com/qlub-dev/argus/commit/ea62ebc5454d52723e925ca884b12f33524d2700))
+
 # [1.2.0-beta.7](https://github.com/qlub-dev/argus/compare/v1.2.0-beta.6...v1.2.0-beta.7) (2025-09-19)
 
 
