@@ -1,3 +1,10 @@
+# [1.2.0-beta.5](https://github.com/qlub-dev/argus/compare/v1.2.0-beta.4...v1.2.0-beta.5) (2025-09-19)
+
+
+### Bug Fixes
+
+* enhance logging in user timing collector and utility functions ([cc2bc1a](https://github.com/qlub-dev/argus/commit/cc2bc1aecb4cf506c866715145b8aad85152b938))
+
 # [1.2.0-beta.4](https://github.com/qlub-dev/argus/compare/v1.2.0-beta.3...v1.2.0-beta.4) (2025-09-19)
 
 
