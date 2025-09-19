@@ -54,7 +54,7 @@ export type UserTimingTracker = {
   lowerBound?: number;
 
   /**
-   * Optional upper bound (in milliseconds) for filtering durations times.
+   * Optional upper bound (in milliseconds) for filtering durations.
    * Metrics above this threshold will be ignored.
    */
   upperBound?: number;
