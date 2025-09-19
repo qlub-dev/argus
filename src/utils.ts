@@ -10,10 +10,12 @@ export const prepareMetric = (metric: Record<string, any>, metadata?: Record<str
 };
 
 export const markUserTimingStart = (id: string) => {
+  console.log("Argus: mark start id ", id);
   performance.mark(`${id}-start`);
 };
 
 export const markUserTimingEnding = (id: string) => {
+  console.log("Argus: mark end id ", id);
   performance.mark(`${id}-end`);
   performance.measure(`${id}-duration`, `${id}-start`, `${id}-end`);
 };
