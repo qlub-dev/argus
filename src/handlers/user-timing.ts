@@ -7,15 +7,20 @@ export const handleUserTimingMetricCollection = (
   tracker: UserTimingTracker,
   onReport: OnReportCb,
   metadata?: Record<string, any>,
-  samplingRate?: number
+  samplingRate?: number,
+  whitelistedFields?: string[]
 ) => {
   const handler = (entry: PerformanceEntry) => {
     const jsonEntry = entry.toJSON();
-    const payload = prepareMetric(jsonEntry, {
-      ...metadata,
-      label: tracker.id,
-      type: "user-timing"
-    });
+    const payload = prepareMetric(
+      jsonEntry,
+      {
+        ...metadata,
+        label: tracker.id,
+        type: "user-timing"
+      },
+      whitelistedFields
+    );
     onReport(payload);
   };
 

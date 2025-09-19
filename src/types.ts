@@ -94,6 +94,12 @@ export type ArgusConfig = {
      * Overrides the global sampling rate if provided.
      */
     samplingRate?: number;
+
+    /**
+     * If specified only these fields from the generated metric payload will be exported. If not specified all
+     * fields from original payload will be exported
+     */
+    whitelistedFields?: string[];
   };
 
   /**
@@ -116,6 +122,12 @@ export type ArgusConfig = {
      * List of trackers to apply for matching and filtering API endpoints.
      */
     trackers?: ApiEndpointTracker[];
+
+    /**
+     * If specified only these fields from the generated metric payload will be exported. If not specified all
+     * fields from original payload will be exported
+     */
+    whitelistedFields?: string[];
   };
 
   /**
@@ -136,5 +148,10 @@ export type ArgusConfig = {
      * List of trackers to apply for matching and filtering metrics.
      */
     trackers?: UserTimingTracker[];
+    /**
+     * If specified only these fields from the generated metric payload will be exported. If not specified all
+     * fields from original payload will be exported
+     */
+    whitelistedFields?: string[];
   };
 };

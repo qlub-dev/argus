@@ -13,15 +13,10 @@ export function createUserTimingCollector(
   const engine = Engine.getInstance();
 
   const handler = (entry: PerformanceEntry) => {
-    console.log("argus user timing entry 1 ", entry);
     if (!(entry instanceof PerformanceMeasure)) return;
-    console.log("argus user timing entry 2 ");
     if (entry.name !== `${id}-duration`) return;
-    console.log("argus user timing entry 3 ");
     if (!checkValueWithinBounds(entry.duration, lowerBound, upperBound)) return;
-    console.log("argus user timing entry 4 ");
     if (!evaluateSamplingChance(samplingRate ?? 1)) return;
-    console.log("argus user timing entry 5 ");
     callback(entry);
   };
 

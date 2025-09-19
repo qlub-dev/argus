@@ -28,13 +28,21 @@ export class Argus {
 
     if (this.#config.webVitals?.enabled) {
       const samplingRate = _config?.webVitals?.samplingRate ?? _config?.samplingRate;
-      reportWebVitals(this.#onReport, metadata, samplingRate);
+      reportWebVitals(this.#onReport, metadata, samplingRate, _config.webVitals?.whitelistedFields);
     }
 
     if (this.#config.apiTiming?.enabled && Array.isArray(this.#config?.apiTiming.trackers)) {
       this.#config.apiTiming.trackers.forEach((tracker) => {
         const samplingRate = tracker?.samplingRate ?? _config?.apiTiming?.samplingRate ?? _config?.samplingRate;
-        this.#apiCollectors.push(handleApiTimingMetricCollection(tracker, this.#onReport, metadata, samplingRate));
+        this.#apiCollectors.push(
+          handleApiTimingMetricCollection(
+            tracker,
+            this.#onReport,
+            metadata,
+            samplingRate,
+            _config?.apiTiming?.whitelistedFields
+          )
+        );
       });
     }
 
@@ -42,7 +50,13 @@ export class Argus {
       this.#config.userTiming.trackers.forEach((tracker) => {
         const samplingRate = tracker?.samplingRate ?? _config?.userTiming?.samplingRate ?? _config?.samplingRate;
         this.#userTimingCollectors.push(
-          handleUserTimingMetricCollection(tracker, this.#onReport, metadata, samplingRate)
+          handleUserTimingMetricCollection(
+            tracker,
+            this.#onReport,
+            metadata,
+            samplingRate,
+            _config?.userTiming?.whitelistedFields
+          )
         );
       });
     }
