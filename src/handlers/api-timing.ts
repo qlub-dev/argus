@@ -1,22 +1,28 @@
 import { createApiTimingCollector } from "../collectors/api-timing";
 import type { OnReportCb } from "../types";
-import type { Tracker } from "../types";
+import type { ApiEndpointTracker } from "../types";
 import { prepareMetric } from "../utils";
 
 export const handleApiTimingMetricCollection = (
-  tracker: Tracker,
+  tracker: ApiEndpointTracker,
   onReport: OnReportCb,
   metadata?: Record<string, any>,
-  samplingRate?: number
+  samplingRate?: number,
+  whitelistedFields?: string[]
 ) => {
   const regex = tracker.regex instanceof RegExp ? tracker.regex : new RegExp(tracker.regex);
 
   const handler = (entry: PerformanceResourceTiming) => {
     const jsonEntry = entry.toJSON();
-    const payload = prepareMetric(jsonEntry, {
-      ...metadata,
-      ...(tracker?.label ? { label: tracker?.label } : {})
-    });
+    const payload = prepareMetric(
+      jsonEntry,
+      {
+        ...metadata,
+        ...(tracker?.label ? { label: tracker?.label } : {}),
+        type: "api-timing"
+      },
+      whitelistedFields
+    );
     onReport(payload);
   };
 

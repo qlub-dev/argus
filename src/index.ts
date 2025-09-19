@@ -1,6 +1,7 @@
 import { reportWebVitals } from "./collectors/web-vitals";
 import { loadConfigs } from "./configs";
 import { handleApiTimingMetricCollection } from "./handlers/api-timing";
+import { handleUserTimingMetricCollection } from "./handlers/user-timing";
 import type { ArgusConfig, OnReportCb } from "./types";
 
 export class Argus {
@@ -8,6 +9,7 @@ export class Argus {
 
   #config: ArgusConfig;
   #apiCollectors: { disconnect: () => void }[] = [];
+  #userTimingCollectors: { disconnect: () => void }[] = [];
   #onReport: OnReportCb;
 
   private constructor(onReport: OnReportCb, config: ArgusConfig) {
@@ -26,13 +28,36 @@ export class Argus {
 
     if (this.#config.webVitals?.enabled) {
       const samplingRate = _config?.webVitals?.samplingRate ?? _config?.samplingRate;
-      reportWebVitals(this.#onReport, metadata, samplingRate);
+      reportWebVitals(this.#onReport, metadata, samplingRate, _config.webVitals?.whitelistedFields);
     }
 
     if (this.#config.apiTiming?.enabled && Array.isArray(this.#config?.apiTiming.trackers)) {
       this.#config.apiTiming.trackers.forEach((tracker) => {
         const samplingRate = tracker?.samplingRate ?? _config?.apiTiming?.samplingRate ?? _config?.samplingRate;
-        this.#apiCollectors.push(handleApiTimingMetricCollection(tracker, this.#onReport, metadata, samplingRate));
+        this.#apiCollectors.push(
+          handleApiTimingMetricCollection(
+            tracker,
+            this.#onReport,
+            metadata,
+            samplingRate,
+            _config?.apiTiming?.whitelistedFields
+          )
+        );
+      });
+    }
+
+    if (this.#config.userTiming?.enabled && Array.isArray(this.#config?.userTiming.trackers)) {
+      this.#config.userTiming.trackers.forEach((tracker) => {
+        const samplingRate = tracker?.samplingRate ?? _config?.userTiming?.samplingRate ?? _config?.samplingRate;
+        this.#userTimingCollectors.push(
+          handleUserTimingMetricCollection(
+            tracker,
+            this.#onReport,
+            metadata,
+            samplingRate,
+            _config?.userTiming?.whitelistedFields
+          )
+        );
       });
     }
   }
@@ -40,7 +65,10 @@ export class Argus {
   shutdown() {
     this.#apiCollectors.forEach((c) => c.disconnect());
     this.#apiCollectors = [];
+    this.#userTimingCollectors.forEach((c) => c.disconnect());
+    this.#userTimingCollectors = [];
   }
 }
 
 export * from "./types";
+export { markUserTimingStart, markUserTimingEnding } from "./utils";
