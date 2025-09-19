@@ -18,7 +18,7 @@ export function createUserTimingCollector(
     console.log("argus user timing entry 2 ");
     if (entry.name !== `${id}-duration`) return;
     console.log("argus user timing entry 3 ");
-    if (checkValueWithinBounds(entry.duration, lowerBound, upperBound)) return;
+    if (!checkValueWithinBounds(entry.duration, lowerBound, upperBound)) return;
     console.log("argus user timing entry 4 ");
     if (evaluateSamplingChance(samplingRate ?? 1)) return;
     console.log("argus user timing entry 5 ");
