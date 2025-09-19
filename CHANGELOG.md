@@ -1,3 +1,26 @@
+# [1.2.0](https://github.com/qlub-dev/argus/compare/v1.1.0...v1.2.0) (2025-09-19)
+
+
+### Bug Fixes
+
+* add logging to checkValueWithinBounds for better traceability ([ff82b2c](https://github.com/qlub-dev/argus/commit/ff82b2ce43a90b9d8794999b25fe498fbf2f7582))
+* **collectors:** disconnect proper types and return if releveant types are not matched ([06a953c](https://github.com/qlub-dev/argus/commit/06a953c8aadd2a7cdc83a8f12657f048762ff331))
+* correct import for user timing collector and update entry type in handler ([d4e74cf](https://github.com/qlub-dev/argus/commit/d4e74cf0bb3d4649ec6d4a12e77d10aec8ef7485))
+* correct logic in checkValueWithinBounds condition in user timing collector ([81ef17c](https://github.com/qlub-dev/argus/commit/81ef17cf6befb1df31605d010af114fad1682090))
+* correct sampling chance evaluation logic in user timing collector ([ea62ebc](https://github.com/qlub-dev/argus/commit/ea62ebc5454d52723e925ca884b12f33524d2700))
+* correct user timing collectors assignment and ensure proper shutdown ([04069f0](https://github.com/qlub-dev/argus/commit/04069f06ea2b73976a1b650f1965f4231ab12291))
+* enhance logging in user timing collector and utility functions ([cc2bc1a](https://github.com/qlub-dev/argus/commit/cc2bc1aecb4cf506c866715145b8aad85152b938))
+* remove logging from user timing functions and improve performance measurement logic ([5a9ffee](https://github.com/qlub-dev/argus/commit/5a9ffeefb86028f9fc118c6bf46fb176b1c8156c))
+* remove unnecessary logging from user timing collector and bounds check ([4058c04](https://github.com/qlub-dev/argus/commit/4058c047808a248d5d9fab2c1ef130ae29322249))
+* streamline user timing collector logic and improve metric handling ([de94651](https://github.com/qlub-dev/argus/commit/de94651c52e279f303bdb5ca55ea50b307066f8b))
+* update user timing collector to use id instead of regex and improve metric handling ([8065b43](https://github.com/qlub-dev/argus/commit/8065b4349065ef3b5b58662d4739ef389e1b29d5))
+
+
+### Features
+
+* add whitelistedFields option to metric collection and reporting functions ([46641ab](https://github.com/qlub-dev/argus/commit/46641abb39eee04461a48b28b7ddec5160a4fbe2))
+* user timing metric collection added ([b76abab](https://github.com/qlub-dev/argus/commit/b76abab752ee85838b44deb5704e663e66581ea1))
+
 # [1.1.0](https://github.com/qlub-dev/argus/compare/v1.0.3...v1.1.0) (2025-09-10)
 
 
