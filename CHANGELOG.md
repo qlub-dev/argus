@@ -1,3 +1,10 @@
+# [1.2.0-beta.4](https://github.com/qlub-dev/argus/compare/v1.2.0-beta.3...v1.2.0-beta.4) (2025-09-19)
+
+
+### Bug Fixes
+
+* update user timing collector to use id instead of regex and improve metric handling ([8065b43](https://github.com/qlub-dev/argus/commit/8065b4349065ef3b5b58662d4739ef389e1b29d5))
+
 # [1.2.0-beta.3](https://github.com/qlub-dev/argus/compare/v1.2.0-beta.2...v1.2.0-beta.3) (2025-09-18)
 
 
