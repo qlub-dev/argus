@@ -1,24 +1,23 @@
 import { createUserTimingCollector } from "../collectors/user-timing";
 import type { OnReportCb } from "../types";
-import type { Tracker } from "../types";
+import type { UserTimingTracker } from "../types";
 import { prepareMetric } from "../utils";
 
 export const handleUserTimingMetricCollection = (
-  tracker: Tracker,
+  tracker: UserTimingTracker,
   onReport: OnReportCb,
   metadata?: Record<string, any>,
   samplingRate?: number
 ) => {
-  const regex = tracker.regex instanceof RegExp ? tracker.regex : new RegExp(tracker.regex);
-
   const handler = (entry: PerformanceEntry) => {
     const jsonEntry = entry.toJSON();
     const payload = prepareMetric(jsonEntry, {
       ...metadata,
-      ...(tracker?.label ? { label: tracker?.label } : {})
+      label: tracker.id,
+      type: "user-timing"
     });
     onReport(payload);
   };
 
-  return createUserTimingCollector(regex, handler, tracker?.lowerBound, tracker?.upperBound, samplingRate);
+  return createUserTimingCollector(tracker.id, handler, tracker?.lowerBound, tracker?.upperBound, samplingRate);
 };

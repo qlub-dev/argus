@@ -4,7 +4,7 @@ import { checkValueWithinBounds } from "../lib/check-value-bounds";
 import { evaluateSamplingChance } from "../lib/evaluate-sampling";
 
 export function createUserTimingCollector(
-  regex: RegExp,
+  id: string,
   callback: (entry: PerformanceEntry) => void,
   lowerBound?: number,
   upperBound?: number,
@@ -14,7 +14,7 @@ export function createUserTimingCollector(
 
   const handler = (entry: PerformanceEntry) => {
     if (!(entry instanceof PerformanceMeasure)) return;
-    if (!regex.test(entry.name)) return;
+    if (entry.name !== `${id}-duration`) return;
     if (checkValueWithinBounds(entry.duration, lowerBound, upperBound)) return;
     if (evaluateSamplingChance(samplingRate ?? 1)) return;
 

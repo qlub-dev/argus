@@ -13,6 +13,10 @@ export const loadConfigs = (configs: Partial<ArgusConfig>): ArgusConfig => {
       ...defaultConfigs.apiTiming,
       ...configs?.apiTiming,
       trackers: configs?.apiTiming?.trackers ?? defaultConfigs?.apiTiming?.trackers
+    },
+    userTiming: {
+      ...defaultConfigs.userTiming,
+      ...configs?.userTiming
     }
   };
 };

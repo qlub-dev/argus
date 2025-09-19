@@ -5,7 +5,7 @@ export type OnPerformanceEntryMeasure = (entry: PerformanceEntry) => void;
 /**
  * A Tracker defines rules for collecting API timing metrics.
  */
-export type Tracker = {
+export type ApiEndpointTracker = {
   /**
    * Regular expression used to match API endpoint URLs.
    */
@@ -33,7 +33,37 @@ export type Tracker = {
    * Optional sampling rate (0–1).
    * For example, 0.5 means collect ~50% of matching events.
    * Defaults to the global or API-level sampling rate if not set.
-   * @default 0.5
+   * @default 1
+   */
+  samplingRate?: number;
+};
+
+/**
+ * A Tracker defines rules for collecting API timing metrics.
+ */
+export type UserTimingTracker = {
+  /**
+   * id of the user timing event
+   */
+  id: string;
+
+  /**
+   * Optional lower bound (in milliseconds) for filtering durations.
+   * Metrics below this threshold will be ignored.
+   */
+  lowerBound?: number;
+
+  /**
+   * Optional upper bound (in milliseconds) for filtering durations times.
+   * Metrics above this threshold will be ignored.
+   */
+  upperBound?: number;
+
+  /**
+   * Optional sampling rate (0–1).
+   * For example, 0.5 means collect ~50% of matching events.
+   * Defaults to the global or API-level sampling rate if not set.
+   * @default 1
    */
   samplingRate?: number;
 };
@@ -85,8 +115,9 @@ export type ArgusConfig = {
     /**
      * List of trackers to apply for matching and filtering API endpoints.
      */
-    trackers?: Tracker[];
+    trackers?: ApiEndpointTracker[];
   };
+
   /**
    * Configuration for User timing metric collection. Wraps around user timing browser API
    */
@@ -104,6 +135,6 @@ export type ArgusConfig = {
     /**
      * List of trackers to apply for matching and filtering metrics.
      */
-    trackers?: Tracker[];
+    trackers?: UserTimingTracker[];
   };
 };

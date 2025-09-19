@@ -3,6 +3,7 @@ export const prepareMetric = (metric: Record<string, any>, metadata?: Record<str
     agent: "argus",
     event: `performance_metric${metadata?.label ? `-${metadata.label}` : ""}`,
     preparedAt: performance.now(),
+    argusMetricType: metadata?.type,
     ...metric,
     ...(metadata ?? {})
   };

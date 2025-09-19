@@ -1,10 +1,10 @@
 import type { ArgusConfig } from "../types";
 
 export const defaultConfigs: ArgusConfig = {
-  samplingRate: 0.5,
+  samplingRate: 1,
   webVitals: {
     enabled: true,
-    samplingRate: 0.5
+    samplingRate: 1
   },
   apiTiming: {
     enabled: true,
@@ -17,6 +17,7 @@ export const defaultConfigs: ArgusConfig = {
     ]
   },
   userTiming: {
-    enabled: false
+    enabled: false,
+    samplingRate: 1
   }
 };
