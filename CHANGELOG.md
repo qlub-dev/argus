@@ -1,3 +1,16 @@
+# [1.2.0-beta.9](https://github.com/qlub-dev/argus/compare/v1.2.0-beta.8...v1.2.0-beta.9) (2025-09-19)
+
+
+### Bug Fixes
+
+* remove logging from user timing functions and improve performance measurement logic ([5a9ffee](https://github.com/qlub-dev/argus/commit/5a9ffeefb86028f9fc118c6bf46fb176b1c8156c))
+* remove unnecessary logging from user timing collector and bounds check ([4058c04](https://github.com/qlub-dev/argus/commit/4058c047808a248d5d9fab2c1ef130ae29322249))
+
+
+### Features
+
+* add whitelistedFields option to metric collection and reporting functions ([46641ab](https://github.com/qlub-dev/argus/commit/46641abb39eee04461a48b28b7ddec5160a4fbe2))
+
 # [1.2.0-beta.8](https://github.com/qlub-dev/argus/compare/v1.2.0-beta.7...v1.2.0-beta.8) (2025-09-19)
 
 
