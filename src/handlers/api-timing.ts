@@ -19,7 +19,7 @@ export const handleApiTimingMetricCollection = (
       {
         ...metadata,
         ...(tracker?.label ? { label: tracker?.label } : {}),
-        type: "api-timing"
+        type: "api_timing"
       },
       whitelistedFields
     );

@@ -3,7 +3,7 @@ import { filterObjectFields } from "./lib/filter-object-fields";
 export const prepareMetric = (metric: Record<string, any>, metadata?: Record<string, any>, filterKeys?: string[]) => {
   const enhancedMetric = {
     agent: "argus",
-    event: `performance_metric${metadata?.label ? `-${metadata.label}` : ""}`,
+    event: `performance_metric${metadata?.type ? `-${metadata.type}` : ""}${metadata?.label ? `-${metadata.label}` : ""}`,
     preparedAt: performance.now(),
     argusMetricType: metadata?.type,
     ...metric,
