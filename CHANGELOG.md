@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/qlub-dev/argus/compare/v1.2.1...v1.2.2) (2025-09-22)
+
+
+### Bug Fixes
+
+* rename markUserTimingEnding to markUserTimingEnd for consistency ([cfb7f07](https://github.com/qlub-dev/argus/commit/cfb7f07d346a8aadc53715b7ae0b3c187f351edd))
+
 ## [1.2.1](https://github.com/qlub-dev/argus/compare/v1.2.0...v1.2.1) (2025-09-22)
 
 
