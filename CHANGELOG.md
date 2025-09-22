@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/qlub-dev/argus/compare/v1.2.0...v1.2.1) (2025-09-22)
+
+
+### Bug Fixes
+
+* add metric type to event id ([98e5171](https://github.com/qlub-dev/argus/commit/98e51717b14628d7c4ae263c9703e6692b7172d7))
+
 # [1.2.0](https://github.com/qlub-dev/argus/compare/v1.1.0...v1.2.0) (2025-09-19)
 
 
