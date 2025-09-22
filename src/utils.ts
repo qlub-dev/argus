@@ -17,7 +17,7 @@ export const markUserTimingStart = (id: string) => {
   performance.mark(`${id}-start`);
 };
 
-export const markUserTimingEnding = (id: string) => {
+export const markUserTimingEnd = (id: string) => {
   const startMarkId = `${id}-start`;
   if (!(performance.getEntriesByName(startMarkId).length > 0)) return;
 
