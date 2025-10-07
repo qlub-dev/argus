@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/qlub-dev/argus/compare/v1.2.4...v1.3.0) (2025-10-07)
+
+
+### Features
+
+* shorten code ([8c3c8b8](https://github.com/qlub-dev/argus/commit/8c3c8b8dfa0d2a7f6dfc2962060566d43bbdf1b6))
+
 ## [1.2.4](https://github.com/qlub-dev/argus/compare/v1.2.3...v1.2.4) (2025-10-07)
 
 
