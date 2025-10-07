@@ -17,7 +17,7 @@ export const handleUserTimingMetricCollection = (
       {
         ...metadata,
         label: tracker.id,
-        type: "user_timing"
+        type: "user-timing"
       },
       whitelistedFields
     );

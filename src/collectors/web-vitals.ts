@@ -12,7 +12,7 @@ const generateReportHandler =
     if (!evaluateSamplingChance(samplingRate ?? 1)) return;
     const metricPayload = prepareMetric(
       metric,
-      { ...metadata, label: metric.name, type: "web_vital" },
+      { ...metadata, label: metric.name, type: "web-vital" },
       whitelistedFields
     );
     onReportCb(metricPayload);
