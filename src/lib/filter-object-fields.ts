@@ -4,9 +4,7 @@ export const filterObjectFields = (source: Record<string, any>, allowedKeys?: st
   }
 
   return Object.keys(source).reduce<Record<string, any>>((acc, key) => {
-    if (allowedKeys.includes(key)) {
-      acc[key] = source[key];
-    }
+    if (allowedKeys.includes(key)) acc[key] = source[key];
     return acc;
   }, {});
 };
