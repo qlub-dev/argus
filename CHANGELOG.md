@@ -1,3 +1,10 @@
+## [1.2.4](https://github.com/qlub-dev/argus/compare/v1.2.3...v1.2.4) (2025-10-07)
+
+
+### Bug Fixes
+
+* shorten event names ([ec4a552](https://github.com/qlub-dev/argus/commit/ec4a552b39a050c2af8aa84d8894ea063cb956f7))
+
 ## [1.2.3](https://github.com/qlub-dev/argus/compare/v1.2.2...v1.2.3) (2025-09-22)
 
 
