@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/qlub-dev/argus/compare/v1.3.0...v1.3.1) (2025-10-07)
+
+
+### Bug Fixes
+
+* remove redundant hyphen ([43af347](https://github.com/qlub-dev/argus/commit/43af347d97d53b922ec89b793e50d6a5c9486928))
+
 # [1.3.0](https://github.com/qlub-dev/argus/compare/v1.2.4...v1.3.0) (2025-10-07)
 
 
