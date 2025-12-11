@@ -1,3 +1,10 @@
+# [1.4.0-alpha.1](https://github.com/qlub-dev/argus/compare/v1.3.1...v1.4.0-alpha.1) (2025-12-11)
+
+
+### Features
+
+* add logs ([69f5699](https://github.com/qlub-dev/argus/commit/69f5699a6f824a373b93efe44e6ac81388c16859))
+
 ## [1.3.1](https://github.com/qlub-dev/argus/compare/v1.3.0...v1.3.1) (2025-10-07)
 
 
