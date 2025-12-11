@@ -12,6 +12,7 @@ export function createApiTimingCollector(
 ) {
   const engine = Engine.getInstance();
 
+  console.info("Argus: API timimg collector initiation");
   const handler = (entry: PerformanceEntry) => {
     if (!(entry instanceof PerformanceResourceTiming)) return;
     if (entry.initiatorType !== "fetch" && entry.initiatorType !== "xmlhttprequest") return;
@@ -25,6 +26,9 @@ export function createApiTimingCollector(
   engine.observe(PerformanceEntryType.RESOURCE, handler);
 
   return {
-    disconnect: () => engine.disconnect(PerformanceEntryType.RESOURCE)
+    disconnect: () => {
+      console.info("Argus: api timing handler disconnected");
+      engine.disconnect(PerformanceEntryType.RESOURCE);
+    }
   };
 }

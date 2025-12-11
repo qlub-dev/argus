@@ -10,6 +10,8 @@ export const handleUserTimingMetricCollection = (
   samplingRate?: number,
   whitelistedFields?: string[]
 ) => {
+  console.info("Argus: User timing metric collector added");
+
   const handler = (entry: PerformanceEntry) => {
     const jsonEntry = entry.toJSON();
     const payload = prepareMetric(

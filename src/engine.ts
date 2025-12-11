@@ -46,10 +46,13 @@ export class Engine {
 
   disconnect(type?: PerformanceEntryType) {
     if (type) {
+      console.info("Argus: ", type, " disconnected");
+
       this.#observers.get(type)?.disconnect();
       this.#observers.delete(type);
       this.#handlers.delete(type);
     } else {
+      console.info("Argus: all disconnected");
       this.#observers.forEach((obs) => obs.disconnect());
       this.#observers.clear();
       this.#handlers.clear();

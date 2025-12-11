@@ -24,6 +24,7 @@ export class Argus {
   }
 
   async init(metadata?: Record<string, any>) {
+    console.info("Argus: Initiated");
     const _config = this.#config;
 
     if (this.#config.webVitals?.enabled) {
@@ -63,6 +64,7 @@ export class Argus {
   }
 
   shutdown() {
+    console.info("Argus: Shutdown initiated");
     this.#apiCollectors.forEach((c) => c.disconnect());
     this.#apiCollectors = [];
     this.#userTimingCollectors.forEach((c) => c.disconnect());

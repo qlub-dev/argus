@@ -12,11 +12,14 @@ export function createUserTimingCollector(
 ) {
   const engine = Engine.getInstance();
 
+  console.info("Argus: User timimg collector initiation");
   const handler = (entry: PerformanceEntry) => {
+    console.info("Argus: user timing handler called a");
     if (!(entry instanceof PerformanceMeasure)) return;
     if (entry.name !== `${id}-duration`) return;
     if (!checkValueWithinBounds(entry.duration, lowerBound, upperBound)) return;
     if (!evaluateSamplingChance(samplingRate ?? 1)) return;
+    console.info("Argus: user timing handler called b");
     callback(entry);
   };
 
@@ -24,6 +27,7 @@ export function createUserTimingCollector(
 
   return {
     disconnect: () => {
+      console.info("Argus: user timing handler disconnected");
       engine.disconnect(PerformanceEntryType.MEASURE);
     }
   };

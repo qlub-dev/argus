@@ -24,6 +24,7 @@ export const reportWebVitals = (
   samplingRate?: number,
   whitelistedFields?: string[]
 ) => {
+  console.info("Argus: Web Vital Report intiated");
   const reportHandler = generateReportHandler(onReport, metadata, samplingRate, whitelistedFields);
   METRIC_HANDLERS.forEach((register) => register(reportHandler));
 };

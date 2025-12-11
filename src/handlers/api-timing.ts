@@ -12,6 +12,7 @@ export const handleApiTimingMetricCollection = (
 ) => {
   const regex = tracker.regex instanceof RegExp ? tracker.regex : new RegExp(tracker.regex);
 
+  console.info("Argus: API timing metric collector added");
   const handler = (entry: PerformanceResourceTiming) => {
     const jsonEntry = entry.toJSON();
     const payload = prepareMetric(
