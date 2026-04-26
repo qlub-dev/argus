@@ -4,8 +4,6 @@
 
 Argus, named after the many-eyed giant in Greek mythology, watches your client-side app and emits structured performance payloads you can forward to analytics or logging.
 
-A [broader product proposal](https://paybyclub.atlassian.net/wiki/spaces/CA/pages/1522401289/Argus+-+Web+Performance+Metric+Collector) describes the full vision. This package currently implements:
-
 - **Web Vitals** — CLS, INP, LCP, FCP, and TTFB via [`web-vitals`](https://github.com/GoogleChrome/web-vitals)
 - **API timing** — `PerformanceObserver` on resource entries, filtered by URL regex and optional duration bounds
 - **User timing** — `performance.mark` / `measure` flows with optional duration bounds, using helpers that pair with named trackers
