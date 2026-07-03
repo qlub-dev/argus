@@ -12,6 +12,11 @@ jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # publish GitHub releases and push @semantic-release/git commits
+      issues: write # comment on released issues
+      pull-requests: write # comment on released pull requests
+      id-token: write # npm trusted publishing (OIDC)
 
     steps:
       - name: Checkout repository
@@ -38,24 +43,16 @@ jobs:
           restore-keys: |
             pnpm-${{ runner.os }}-
 
-      - name: Create .npmrc
-        run: cp .npmrc.ci .npmrc
-
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Run tests
         run: pnpm test --passWithNoTests
 
       - name: Run build
         run: pnpm build
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Semantic Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: pnpm dlx semantic-release
