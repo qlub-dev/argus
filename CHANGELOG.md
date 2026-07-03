@@ -1,3 +1,10 @@
+# [1.6.0-alpha.2](https://github.com/qlub-dev/argus/compare/v1.6.0-alpha.1...v1.6.0-alpha.2) (2026-07-03)
+
+
+### Features
+
+* add config-driven web vitals attribution support ([32385f9](https://github.com/qlub-dev/argus/commit/32385f987a6beb998162c16d7cd25c4bfce5cbb8))
+
 # [1.6.0-alpha.1](https://github.com/qlub-dev/argus/compare/v1.5.0...v1.6.0-alpha.1) (2026-07-03)
 
 
