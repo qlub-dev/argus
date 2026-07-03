@@ -104,9 +104,12 @@ export type ArgusConfig = {
     /**
      * When enabled, loads the `web-vitals` "attribution" build instead of the base build,
      * via a dynamic `import()` executed only when this is enabled. Attribution metrics
-     * include an extra `attribution` field with diagnostic detail (contributing
-     * elements/timings) useful for debugging regressions. Consumers who don't opt in
-     * pay no extra bundle/runtime cost.
+     * include extra diagnostic fields (contributing elements/timings, e.g. `target`,
+     * `timeToFirstByte`, `resourceLoadDelay` for LCP) flattened onto the top-level payload,
+     * so they're individually selectable via `whitelistedFields` like any other field. Some
+     * of these fields carry raw `PerformanceEntry`-like objects (e.g. `navigationEntry`,
+     * `lcpEntry`) — exclude them from `whitelistedFields` to avoid exporting heavy raw
+     * entries. Consumers who don't opt in pay no extra bundle/runtime cost.
      * Default: `false`.
      */
     attribution?: boolean;
