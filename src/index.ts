@@ -28,7 +28,13 @@ export class Argus {
 
     if (this.#config.webVitals?.enabled) {
       const samplingRate = _config?.webVitals?.samplingRate ?? _config?.samplingRate;
-      reportWebVitals(this.#onReport, metadata, samplingRate, _config.webVitals?.whitelistedFields);
+      reportWebVitals(
+        this.#onReport,
+        metadata,
+        samplingRate,
+        _config.webVitals?.whitelistedFields,
+        _config.webVitals?.attribution
+      );
     }
 
     if (this.#config.apiTiming?.enabled && Array.isArray(this.#config?.apiTiming.trackers)) {
