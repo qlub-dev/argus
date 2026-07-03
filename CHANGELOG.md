@@ -1,3 +1,17 @@
+# [1.6.0](https://github.com/qlub-dev/argus/compare/v1.5.0...v1.6.0) (2026-07-03)
+
+
+### Bug Fixes
+
+* flatten web vitals attribution data ([cf5f5e5](https://github.com/qlub-dev/argus/commit/cf5f5e59c65bdd6f0e14ef75a3e07d21da5c7331))
+* setup trusted publishing ([a9967a6](https://github.com/qlub-dev/argus/commit/a9967a692d2c58b38acbda1ef2ec9e89663c272e))
+
+
+### Features
+
+* add config-driven web vitals attribution support ([32385f9](https://github.com/qlub-dev/argus/commit/32385f987a6beb998162c16d7cd25c4bfce5cbb8))
+* add config-driven web vitals attribution support ([01594cf](https://github.com/qlub-dev/argus/commit/01594cf475e3639428a2c95e3129cbbbf930d287))
+
 # [1.5.0](https://github.com/qlub-dev/argus/compare/v1.4.0...v1.5.0) (2026-04-26)
 
 
