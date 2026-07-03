@@ -94,4 +94,35 @@ describe("reportWebVitals", () => {
 
     warnSpy.mockRestore();
   });
+
+  it("flattens attribution fields onto the payload and lets whitelistedFields filter them", async () => {
+    const fakeLcpMetric = {
+      name: "LCP",
+      value: 2500,
+      rating: "good",
+      attribution: {
+        target: "body > img",
+        timeToFirstByte: 100,
+        navigationEntry: { raw: "heavy-entry" }
+      }
+    };
+
+    onLCPAttr.mockImplementation((cb: (metric: unknown) => void) => cb(fakeLcpMetric));
+
+    reportWebVitals(onReport, undefined, 1, ["event", "value", "target", "timeToFirstByte"], true);
+
+    await flushMicrotasks();
+
+    expect(onReport).toHaveBeenCalledTimes(1);
+    const payload = onReport.mock.calls[0][0];
+
+    expect(payload).toEqual({
+      event: "perf-web-vital-LCP",
+      value: 2500,
+      target: "body > img",
+      timeToFirstByte: 100
+    });
+    expect(payload.attribution).toBeUndefined();
+    expect(payload.navigationEntry).toBeUndefined();
+  });
 });
