@@ -4,7 +4,8 @@ export const defaultConfigs: ArgusConfig = {
   samplingRate: 1,
   webVitals: {
     enabled: true,
-    samplingRate: 1
+    samplingRate: 1,
+    attribution: false
   },
   apiTiming: {
     enabled: true,

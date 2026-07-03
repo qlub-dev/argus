@@ -18,12 +18,30 @@ const generateReportHandler =
     onReportCb(metricPayload);
   };
 
+const registerAttributionHandlers = (reportHandler: (metric: Metric) => void) => {
+  import("web-vitals/attribution")
+    .then(({ onCLS: onCLSAttr, onFCP: onFCPAttr, onINP: onINPAttr, onLCP: onLCPAttr, onTTFB: onTTFBAttr }) => {
+      [onCLSAttr, onINPAttr, onLCPAttr, onFCPAttr, onTTFBAttr].forEach((register) => register(reportHandler));
+    })
+    .catch((err) => {
+      console.warn(`Argus: failed to load web-vitals attribution build, falling back to standard metrics. ${err}`);
+      METRIC_HANDLERS.forEach((register) => register(reportHandler));
+    });
+};
+
 export const reportWebVitals = (
   onReport: OnReportCb,
   metadata?: Record<string, any>,
   samplingRate?: number,
-  whitelistedFields?: string[]
+  whitelistedFields?: string[],
+  attribution?: boolean
 ) => {
   const reportHandler = generateReportHandler(onReport, metadata, samplingRate, whitelistedFields);
+
+  if (attribution) {
+    registerAttributionHandlers(reportHandler);
+    return;
+  }
+
   METRIC_HANDLERS.forEach((register) => register(reportHandler));
 };

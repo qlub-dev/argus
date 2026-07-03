@@ -19,6 +19,6 @@ export default [
       }
     ],
     plugins: [nodeResolve(), json(), typescript({ tsconfig: "./tsconfig.json" }), terser()],
-    external: ["web-vitals"]
+    external: ["web-vitals", "web-vitals/attribution"]
   }
 ];

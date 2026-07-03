@@ -100,6 +100,16 @@ export type ArgusConfig = {
      * fields from original payload will be exported
      */
     whitelistedFields?: string[];
+
+    /**
+     * When enabled, loads the `web-vitals` "attribution" build instead of the base build,
+     * via a dynamic `import()` executed only when this is enabled. Attribution metrics
+     * include an extra `attribution` field with diagnostic detail (contributing
+     * elements/timings) useful for debugging regressions. Consumers who don't opt in
+     * pay no extra bundle/runtime cost.
+     * Default: `false`.
+     */
+    attribution?: boolean;
   };
 
   /**

@@ -35,7 +35,7 @@ Published on the [public npm registry](https://www.npmjs.com/package/@qlub-foss/
 Define an `ArgusConfig` (partial configs are merged with [defaults](src/configs/defaults.ts)):
 
 - **`samplingRate`** — Global default (0–1) when a subsection does not override it.
-- **`webVitals`** — `enabled`, `samplingRate`, optional `whitelistedFields` on the emitted payload.
+- **`webVitals`** — `enabled`, `samplingRate`, optional `whitelistedFields` on the emitted payload, optional `attribution` (default `false`) to lazily load the `web-vitals` attribution build and add an `attribution` field with diagnostic detail to each payload. Enabling it dynamically imports `web-vitals/attribution` in addition to the base build that's always loaded, so it's a deliberate size tradeoff, not a swap — only pay it if you use it. If you also set `whitelistedFields`, include `"attribution"` in that list or the diagnostic data will be stripped before reporting.
 - **`apiTiming`** — `enabled`, `samplingRate`, `trackers` (`regex`, optional `label`, `lowerBound`, `upperBound`, per-tracker `samplingRate`), optional `whitelistedFields`.
 - **`userTiming`** — `enabled` (default off in defaults), `samplingRate`, `trackers` (`id` matching your mark/measure names, optional bounds and `samplingRate`), optional `whitelistedFields`.
 
@@ -44,13 +44,14 @@ Each reported object is normalized with `agent: "argus"`, timing fields, your `i
 ### Example config
 
 ```ts
-import type { ArgusConfig } from '@qlub-foss/argus';
+import type { ArgusConfig } from "@qlub-foss/argus";
 
 export const argusConfig: ArgusConfig = {
   samplingRate: 1,
   webVitals: {
     enabled: true,
     samplingRate: 1,
+    attribution: true
   },
   apiTiming: {
     enabled: true,
@@ -58,25 +59,25 @@ export const argusConfig: ArgusConfig = {
     trackers: [
       {
         regex: /\/gods/,
-        label: 'fetch_greek_gods',
+        label: "fetch_greek_gods",
         lowerBound: 200,
         upperBound: 800,
-        samplingRate: 0.7,
+        samplingRate: 0.7
       },
       {
         regex: /\/philosophers/,
-        label: 'fetch_philosophers',
+        label: "fetch_philosophers",
         lowerBound: 100,
         upperBound: 900,
-        samplingRate: 0.3,
-      },
-    ],
+        samplingRate: 0.3
+      }
+    ]
   },
   userTiming: {
     enabled: true,
     samplingRate: 1,
-    trackers: [{ id: 'checkout-flow', lowerBound: 0, upperBound: 30_000 }],
-  },
+    trackers: [{ id: "checkout-flow", lowerBound: 0, upperBound: 30_000 }]
+  }
 };
 ```
 
@@ -90,9 +91,9 @@ export const argusConfig: ArgusConfig = {
 User timing trackers expect you to bracket work with the exported helpers (or equivalent marks/measures). The `id` in config must match the prefix used in `markUserTimingStart` / `markUserTimingEnd`:
 
 ```ts
-import { useEffect } from 'react';
-import { Argus, markUserTimingStart, markUserTimingEnd } from '@qlub-foss/argus';
-import { argusConfig } from './argusConfig';
+import { useEffect } from "react";
+import { Argus, markUserTimingEnd, markUserTimingStart } from "@qlub-foss/argus";
+import { argusConfig } from "./argusConfig";
 
 const handleMetricReport = (metric: Record<string, any>) => {
   // forward metric
@@ -103,7 +104,7 @@ export function App() {
     const argus = Argus.getInstance(handleMetricReport, argusConfig);
 
     void argus.init({
-      appVersion: '1.0.0',
+      appVersion: "1.0.0"
     });
 
     return () => {
@@ -112,11 +113,11 @@ export function App() {
   }, []);
 
   const onCheckout = () => {
-    markUserTimingStart('checkout-flow');
+    markUserTimingStart("checkout-flow");
     try {
       // ...
     } finally {
-      markUserTimingEnd('checkout-flow');
+      markUserTimingEnd("checkout-flow");
     }
   };
 
