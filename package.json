@@ -1,6 +1,6 @@
 {
   "name": "@qlub-foss/argus",
-  "version": "1.6.0-alpha.2",
+  "version": "1.6.0-alpha.3",
   "description": "Web performance metric collector",
   "author": "Qlub",
   "license": "MIT",

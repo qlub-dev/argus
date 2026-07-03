@@ -1,3 +1,10 @@
+# [1.6.0-alpha.3](https://github.com/qlub-dev/argus/compare/v1.6.0-alpha.2...v1.6.0-alpha.3) (2026-07-03)
+
+
+### Bug Fixes
+
+* flatten web vitals attribution data ([cf5f5e5](https://github.com/qlub-dev/argus/commit/cf5f5e59c65bdd6f0e14ef75a3e07d21da5c7331))
+
 # [1.6.0-alpha.2](https://github.com/qlub-dev/argus/compare/v1.6.0-alpha.1...v1.6.0-alpha.2) (2026-07-03)
 
 
