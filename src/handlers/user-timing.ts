@@ -1,12 +1,11 @@
 import { createUserTimingCollector } from "../collectors/user-timing";
-import type { OnReportCb } from "../types";
-import type { UserTimingTracker } from "../types";
+import type { MetadataGetter, OnReportCb, UserTimingTracker } from "../types";
 import { prepareMetric } from "../utils";
 
 export const handleUserTimingMetricCollection = (
   tracker: UserTimingTracker,
   onReport: OnReportCb,
-  metadata?: Record<string, any>,
+  getMetadata: MetadataGetter,
   samplingRate?: number,
   whitelistedFields?: string[]
 ) => {
@@ -15,7 +14,7 @@ export const handleUserTimingMetricCollection = (
     const payload = prepareMetric(
       jsonEntry,
       {
-        ...metadata,
+        ...getMetadata(),
         label: tracker.id,
         type: "user-timing"
       },

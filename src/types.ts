@@ -1,5 +1,7 @@
 export type OnReportCb = (payload: Record<string, any>) => void;
 
+export type MetadataGetter = () => Record<string, any>;
+
 export type OnPerformanceEntryMeasure = (entry: PerformanceEntry) => void;
 
 /**
@@ -168,3 +170,21 @@ export type ArgusConfig = {
     whitelistedFields?: string[];
   };
 };
+
+export type MetadataSnapshot = { at: number; metadata: Record<string, any> };
+
+export type TrackerCollector = { disconnect: () => void };
+
+export type TrackerSection<T> = {
+  enabled?: boolean;
+  samplingRate?: number;
+  trackers?: T[];
+  whitelistedFields?: string[];
+};
+
+/**
+ * Resolves the metadata that was current at a given `performance.now()` timestamp.
+ * Called with no timestamp, it returns the current (live) metadata. Internal wiring
+ * between `Argus` and this collector — not part of the public config surface.
+ */
+export type MetadataResolver = (at?: number) => Record<string, any>;
