@@ -1,3 +1,10 @@
+# [1.7.0-alpha.1](https://github.com/qlub-dev/argus/compare/v1.6.0...v1.7.0-alpha.1) (2026-07-05)
+
+
+### Features
+
+* split metadata from init and resolve web vitals by measurement time ([054fc7f](https://github.com/qlub-dev/argus/commit/054fc7f5fe96e999f6649767f88aed72997d22e0))
+
 # [1.6.0](https://github.com/qlub-dev/argus/compare/v1.5.0...v1.6.0) (2026-07-03)
 
 
