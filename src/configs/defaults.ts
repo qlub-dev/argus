@@ -1,6 +1,7 @@
 import type { ArgusConfig } from "../types";
 
 export const defaultConfigs: ArgusConfig = {
+  metadataUpdateMode: "override",
   samplingRate: 1,
   webVitals: {
     enabled: true,

@@ -22,6 +22,7 @@ import type {
 // Rarer and self-correcting compared to the flush-time misattribution this
 // history exists to fix, so it's accepted rather than engineered away.
 const METADATA_HISTORY_LIMIT = 50;
+const isEmptyMetadataValue = (value: unknown) => value === undefined || value === null || value === "";
 
 export class Argus {
   static #instance: Argus | null = null;
@@ -55,7 +56,9 @@ export class Argus {
 
   /**
    * Merges the given fields into the metadata attached to every subsequent report.
-   * Set a key to `undefined` to remove it. API/user-timing reports always read the
+   * In `override` mode, set a key to `undefined` to remove it. In `keepLastValid`
+   * mode, empty incoming values (`undefined`, `null`, `""`) keep the previous value.
+   * API/user-timing reports always read the
    * current (live) metadata. Web-vital reports are resolved against a history of
    * snapshots so each metric is attributed to the metadata that was current at the
    * moment it was *measured*, not when it eventually flushes — CLS/INP in
@@ -63,7 +66,11 @@ export class Argus {
    * view up to that point. See `METADATA_HISTORY_LIMIT` for the eviction tradeoff.
    */
   setMetadata(metadata: Record<string, any>) {
-    const merged: Record<string, any> = { ...this.#metadata, ...metadata };
+    const merged: Record<string, any> =
+      this.#config.metadataUpdateMode === "keepLastValid"
+        ? this.#mergeMetadataKeepingLastValid(metadata)
+        : { ...this.#metadata, ...metadata };
+
     Object.keys(merged).forEach((key) => {
       if (merged[key] === undefined) delete merged[key];
     });
@@ -74,6 +81,17 @@ export class Argus {
 
     this.#metadataHistory.push({ at: performance.now(), metadata: merged });
     if (this.#metadataHistory.length > METADATA_HISTORY_LIMIT) this.#metadataHistory.shift();
+  }
+
+  #mergeMetadataKeepingLastValid(metadata: Record<string, any>) {
+    const merged: Record<string, any> = { ...this.#metadata };
+
+    Object.entries(metadata).forEach(([key, value]) => {
+      if (isEmptyMetadataValue(value)) return;
+      merged[key] = value;
+    });
+
+    return merged;
   }
 
   #resolveMetadataAt(at?: number): Record<string, any> {
