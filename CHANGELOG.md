@@ -1,3 +1,10 @@
+# [1.7.0-alpha.2](https://github.com/qlub-dev/argus/compare/v1.7.0-alpha.1...v1.7.0-alpha.2) (2026-07-06)
+
+
+### Features
+
+* add metadataUpdateMode to ArgusConfig for flexible metadata handling ([964c9a3](https://github.com/qlub-dev/argus/commit/964c9a3dfb27fa8747ac9dcbdcbb40bcaf7ab343))
+
 # [1.7.0-alpha.1](https://github.com/qlub-dev/argus/compare/v1.6.0...v1.7.0-alpha.1) (2026-07-05)
 
 
