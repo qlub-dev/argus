@@ -66,7 +66,7 @@ describe("Argus", () => {
     expect(userGetMetadata()).toEqual({ pagePath: "/tip" });
   });
 
-  it("removes metadata keys set to undefined", async () => {
+  it("removes metadata keys set to undefined in default override mode", async () => {
     const argus = Argus.getInstance(onReport, { webVitals: { enabled: true } });
 
     await argus.init({ pagePath: "/menu", orderId: "123" });
@@ -75,6 +75,29 @@ describe("Argus", () => {
     const resolveMetadata = reportWebVitalsMock.mock.calls[0][1] as (at?: number) => Record<string, unknown>;
     expect(resolveMetadata()).toEqual({ pagePath: "/menu" });
     expect("orderId" in resolveMetadata()).toBe(false);
+  });
+
+  it("overrides with empty values in default override mode", async () => {
+    const argus = Argus.getInstance(onReport, { webVitals: { enabled: true } });
+
+    await argus.init({ pagePath: "/menu", orderId: "123", userType: "guest" });
+    argus.setMetadata({ orderId: "", userType: null });
+
+    const resolveMetadata = reportWebVitalsMock.mock.calls[0][1] as (at?: number) => Record<string, unknown>;
+    expect(resolveMetadata()).toEqual({ pagePath: "/menu", orderId: "", userType: null });
+  });
+
+  it("keeps last valid value for empty incoming values in keepLastValid mode", async () => {
+    const argus = Argus.getInstance(onReport, {
+      metadataUpdateMode: "keepLastValid",
+      webVitals: { enabled: true }
+    });
+
+    await argus.init({ pagePath: "/menu", orderId: "123", userType: "guest" });
+    argus.setMetadata({ orderId: undefined, userType: "", pagePath: null });
+
+    const resolveMetadata = reportWebVitalsMock.mock.calls[0][1] as (at?: number) => Record<string, unknown>;
+    expect(resolveMetadata()).toEqual({ pagePath: "/menu", orderId: "123", userType: "guest" });
   });
 
   it("re-registers api and user timing collectors after shutdown", async () => {

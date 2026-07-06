@@ -76,6 +76,13 @@ export type UserTimingTracker = {
  */
 export type ArgusConfig = {
   /**
+   * Controls how `setMetadata()` handles empty incoming values (`undefined`, `null`, `""`).
+   * - `override` (default): applies the incoming value as-is (`undefined` removes the key).
+   * - `keepLastValid`: keeps the previous non-empty value when the incoming value is empty.
+   */
+  metadataUpdateMode?: "override" | "keepLastValid";
+
+  /**
    * Global sampling rate (0–1).
    * Applied unless overridden at the webVitals or apiTiming level.
    */
