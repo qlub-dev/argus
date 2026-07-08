@@ -1,3 +1,11 @@
+# [1.7.0](https://github.com/qlub-dev/argus/compare/v1.6.0...v1.7.0) (2026-07-08)
+
+
+### Features
+
+* add metadataUpdateMode to ArgusConfig for flexible metadata handling ([964c9a3](https://github.com/qlub-dev/argus/commit/964c9a3dfb27fa8747ac9dcbdcbb40bcaf7ab343))
+* split metadata from init and resolve web vitals by measurement time ([054fc7f](https://github.com/qlub-dev/argus/commit/054fc7f5fe96e999f6649767f88aed72997d22e0))
+
 # [1.6.0](https://github.com/qlub-dev/argus/compare/v1.5.0...v1.6.0) (2026-07-03)
 
 
