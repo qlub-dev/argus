@@ -34,6 +34,9 @@ Published on the [public npm registry](https://www.npmjs.com/package/@qlub-foss/
 
 Define an `ArgusConfig` (partial configs are merged with [defaults](src/configs/defaults.ts)):
 
+- **`metadataUpdateMode`** — controls how `setMetadata()` handles empty incoming values (`undefined`, `null`, `""`):
+  - `override` (default): applies incoming values as-is (`undefined` removes a key).
+  - `keepLastValid`: ignores empty incoming values and keeps the previous non-empty value.
 - **`samplingRate`** — Global default (0–1) when a subsection does not override it.
 - **`webVitals`** — `enabled`, `samplingRate`, optional `whitelistedFields` on the emitted payload, optional `attribution` (default `false`) to lazily load the `web-vitals` attribution build. Enabling it dynamically imports `web-vitals/attribution` in addition to the base build that's always loaded, so it's a deliberate size tradeoff, not a swap — only pay it if you use it. When enabled, the metric-specific attribution diagnostic fields (e.g. `target`, `timeToFirstByte`, `resourceLoadDelay` for LCP — see the [web-vitals attribution docs](https://github.com/GoogleChrome/web-vitals/blob/main/README.md#attribution-build)) are flattened onto the top-level payload rather than nested under an `attribution` key, so each one is individually selectable via `whitelistedFields` just like any other field. Several attribution fields carry raw `PerformanceEntry`-like objects (`navigationEntry`, `lcpEntry`, `lcpResourceEntry`, `largestShiftEntry`, `largestShiftSource`, `fcpEntry`, `processedEventEntries`, `longAnimationFrameEntries`, `longestScript`) — omit these from `whitelistedFields` to skip exporting the heavy raw entries. If `whitelistedFields` isn't set, everything is exported, including these raw entries.
 - **`apiTiming`** — `enabled`, `samplingRate`, `trackers` (`regex`, optional `label`, `lowerBound`, `upperBound`, per-tracker `samplingRate`), optional `whitelistedFields`.
@@ -47,6 +50,7 @@ Each reported object is normalized with `agent: "argus"`, timing fields, your `i
 import type { ArgusConfig } from "@qlub-foss/argus";
 
 export const argusConfig: ArgusConfig = {
+  metadataUpdateMode: "override",
   samplingRate: 1,
   webVitals: {
     enabled: true,

@@ -38,7 +38,10 @@ describe("reportWebVitals", () => {
   const onReport = jest.fn();
 
   afterEach(() => {
-    jest.clearAllMocks();
+    // resetAllMocks (not clearAllMocks) — every reportWebVitals() call re-registers
+    // all five metric handlers unconditionally, so a leftover mockImplementation from
+    // an earlier test would otherwise fire again here.
+    jest.resetAllMocks();
   });
 
   it("registers the base handlers by default", () => {
@@ -93,6 +96,137 @@ describe("reportWebVitals", () => {
     expect(onTTFB).toHaveBeenCalledTimes(1);
 
     warnSpy.mockRestore();
+  });
+
+  it("resolves metadata by the metric's measurement time, not report time", () => {
+    // Two metadata "snapshots" keyed by measurement time, exactly like Argus's
+    // history-backed resolver would produce for two setMetadata() calls.
+    const resolveMetadata = jest.fn((at?: number) =>
+      at !== undefined && at < 500 ? { pagePath: "/menu" } : { pagePath: "/bill" }
+    );
+
+    onLCP.mockImplementation((cb: (metric: unknown) => void) => {
+      cb({ name: "LCP", value: 1200, rating: "good", entries: [{ startTime: 100 }] });
+    });
+
+    reportWebVitals(onReport, resolveMetadata, 1, ["event", "value", "pagePath"], false);
+
+    expect(resolveMetadata).toHaveBeenCalledWith(100);
+    expect(onReport).toHaveBeenCalledWith(
+      expect.objectContaining({ event: "perf-web-vital-LCP", value: 1200, pagePath: "/menu" })
+    );
+
+    // The metric measured at t=100 is reported here, well after metadata moved on to /bill,
+    // but the payload must still reflect the page active when it was actually measured.
+    onLCP.mock.calls[0][0]({ name: "LCP", value: 1200, rating: "good", entries: [{ startTime: 100 }] });
+    expect(onReport).toHaveBeenLastCalledWith(
+      expect.objectContaining({ event: "perf-web-vital-LCP", value: 1200, pagePath: "/menu" })
+    );
+  });
+
+  it("resolves CLS by the largest layout-shift entry's startTime, not the first or last", () => {
+    const resolveMetadata = jest.fn(() => ({}));
+
+    onCLS.mockImplementation((cb: (metric: unknown) => void) => {
+      cb({
+        name: "CLS",
+        value: 0.3,
+        rating: "good",
+        entries: [
+          { startTime: 100, value: 0.05 },
+          { startTime: 300, value: 0.2 }, // largest — this is the timestamp that should be used
+          { startTime: 500, value: 0.05 }
+        ]
+      });
+    });
+
+    reportWebVitals(onReport, resolveMetadata, 1, undefined, false);
+
+    expect(resolveMetadata).toHaveBeenCalledWith(300);
+  });
+
+  it("resolves INP and FCP by the first entry's startTime", () => {
+    const resolveMetadata = jest.fn(() => ({}));
+
+    onINP.mockImplementation((cb: (metric: unknown) => void) => {
+      cb({ name: "INP", value: 200, rating: "good", entries: [{ startTime: 750 }] });
+    });
+    onFCP.mockImplementation((cb: (metric: unknown) => void) => {
+      cb({ name: "FCP", value: 1000, rating: "good", entries: [{ startTime: 900 }] });
+    });
+
+    reportWebVitals(onReport, resolveMetadata, 1, undefined, false);
+
+    expect(resolveMetadata).toHaveBeenCalledWith(750);
+    expect(resolveMetadata).toHaveBeenCalledWith(900);
+  });
+
+  it("resolves TTFB to timestamp 0 (the navigation entry's startTime, always exactly 0)", () => {
+    const resolveMetadata = jest.fn(() => ({}));
+
+    onTTFB.mockImplementation((cb: (metric: unknown) => void) => {
+      cb({ name: "TTFB", value: 50, rating: "good", entries: [{ startTime: 0 }] });
+    });
+
+    reportWebVitals(onReport, resolveMetadata, 1, undefined, false);
+
+    expect(resolveMetadata).toHaveBeenCalledWith(0);
+  });
+
+  it("resolves an undefined timestamp when a metric has no entries", () => {
+    const resolveMetadata = jest.fn(() => ({}));
+
+    onCLS.mockImplementation((cb: (metric: unknown) => void) => {
+      cb({ name: "CLS", value: 0, rating: "good", entries: [] });
+    });
+
+    reportWebVitals(onReport, resolveMetadata, 1, undefined, false);
+
+    expect(resolveMetadata).toHaveBeenCalledWith(undefined);
+  });
+
+  it("falls back to current metadata when no resolver is provided (empty history)", () => {
+    onLCP.mockImplementation((cb: (metric: unknown) => void) => {
+      cb({ name: "LCP", value: 1200, rating: "good", entries: [{ startTime: 100 }] });
+    });
+
+    reportWebVitals(onReport, undefined, 1, ["event", "value"], false);
+
+    expect(onReport).toHaveBeenCalledWith(expect.objectContaining({ event: "perf-web-vital-LCP", value: 1200 }));
+  });
+
+  it("resolves each metric independently across a simulated bfcache restore", () => {
+    // Simulates two metric instances from the same registered handler — as web-vitals
+    // produces on a bfcache restore — measured on either side of a metadata change.
+    const resolveMetadata = jest.fn((at?: number) => (at === 100 ? { pagePath: "/menu" } : { pagePath: "/bill" }));
+
+    // Only capture the registered handler here — don't fire it on registration —
+    // so the two manual invocations below are the only reports produced.
+    reportWebVitals(onReport, resolveMetadata, 1, ["event", "pagePath"], false);
+
+    const handler = onLCP.mock.calls[0][0];
+    handler({ name: "LCP", value: 1000, rating: "good", entries: [{ startTime: 100 }] });
+    handler({ name: "LCP", value: 900, rating: "good", entries: [{ startTime: 900 }] }); // post-restore instance
+
+    expect(onReport).toHaveBeenNthCalledWith(1, expect.objectContaining({ pagePath: "/menu" }));
+    expect(onReport).toHaveBeenNthCalledWith(2, expect.objectContaining({ pagePath: "/bill" }));
+  });
+
+  it("stops reporting after disconnect and resumes after reconnect", () => {
+    onLCP.mockImplementation((cb: (metric: unknown) => void) => {
+      cb({ name: "LCP", value: 1200, rating: "good" });
+    });
+
+    const collector = reportWebVitals(onReport, undefined, 1, undefined, false);
+    expect(onReport).toHaveBeenCalledTimes(1);
+
+    collector.disconnect();
+    onLCP.mock.calls[0][0]({ name: "LCP", value: 1300, rating: "good" });
+    expect(onReport).toHaveBeenCalledTimes(1);
+
+    collector.reconnect();
+    onLCP.mock.calls[0][0]({ name: "LCP", value: 1400, rating: "good" });
+    expect(onReport).toHaveBeenCalledTimes(2);
   });
 
   it("flattens attribution fields onto the payload and lets whitelistedFields filter them", async () => {

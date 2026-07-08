@@ -1,12 +1,11 @@
 import { createApiTimingCollector } from "../collectors/api-timing";
-import type { OnReportCb } from "../types";
-import type { ApiEndpointTracker } from "../types";
+import type { ApiEndpointTracker, MetadataGetter, OnReportCb } from "../types";
 import { prepareMetric } from "../utils";
 
 export const handleApiTimingMetricCollection = (
   tracker: ApiEndpointTracker,
   onReport: OnReportCb,
-  metadata?: Record<string, any>,
+  getMetadata: MetadataGetter,
   samplingRate?: number,
   whitelistedFields?: string[]
 ) => {
@@ -17,7 +16,7 @@ export const handleApiTimingMetricCollection = (
     const payload = prepareMetric(
       jsonEntry,
       {
-        ...metadata,
+        ...getMetadata(),
         ...(tracker?.label ? { label: tracker?.label } : {}),
         type: "api-timing"
       },

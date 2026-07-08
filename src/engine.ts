@@ -5,10 +5,12 @@ export class Engine {
   static #instance: Engine;
   #observers: Map<PerformanceEntryType, PerformanceObserver>;
   #handlers: Map<PerformanceEntryType, OnPerformanceEntryMeasure[]>;
+  #disconnectedAt: Map<PerformanceEntryType, number>;
 
   private constructor() {
     this.#observers = new Map();
     this.#handlers = new Map();
+    this.#disconnectedAt = new Map();
   }
 
   static getInstance() {
@@ -30,7 +32,11 @@ export class Engine {
 
     if (!this.#observers.has(type)) {
       const observer = new PerformanceObserver((list) => {
+        // Observers register with buffered: true, so re-observing after a
+        // disconnect would replay (and re-report) entries delivered before it.
+        const cutoff = this.#disconnectedAt.get(type) ?? -1;
         for (const entry of list.getEntries()) {
+          if (entry.startTime <= cutoff) continue;
           this.#handlers.get(type)?.forEach((h) => h(entry));
         }
       });
@@ -49,8 +55,12 @@ export class Engine {
       this.#observers.get(type)?.disconnect();
       this.#observers.delete(type);
       this.#handlers.delete(type);
+      this.#disconnectedAt.set(type, performance.now());
     } else {
-      this.#observers.forEach((obs) => obs.disconnect());
+      this.#observers.forEach((obs, observedType) => {
+        obs.disconnect();
+        this.#disconnectedAt.set(observedType, performance.now());
+      });
       this.#observers.clear();
       this.#handlers.clear();
     }
